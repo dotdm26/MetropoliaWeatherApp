@@ -6,6 +6,21 @@
     android:layout_height="match_parent"
     tools:context=".calendarActivity">
 
+    <TextView
+        android:id="@+id/humidity"
+        android:layout_width="150dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginLeft="32dp"
+        android:layout_marginTop="32dp"
+        android:text="Humidity"
+        app:layout_constraintBottom_toTopOf="@+id/returnButton"
+        app:layout_constraintEnd_toStartOf="@+id/minHumid"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/temperature"
+        app:layout_constraintVertical_bias="0.0" />
+
     <Button
         android:id="@+id/returnButton"
         android:layout_width="88dp"
@@ -70,7 +85,7 @@
 
     <EditText
         android:id="@+id/newPref"
-        android:layout_width="336dp"
+        android:layout_width="0dp"
         android:layout_height="44dp"
         android:layout_marginStart="32dp"
         android:layout_marginLeft="32dp"
@@ -85,8 +100,8 @@
         app:layout_constraintTop_toBottomOf="@+id/prefRemoveButton" />
 
     <Spinner
-        android:id="@+id/weatherType"
-        android:layout_width="333dp"
+        android:id="@+id/weatherTypeSpin"
+        android:layout_width="0dp"
         android:layout_height="46dp"
         android:layout_marginStart="32dp"
         android:layout_marginLeft="32dp"
@@ -103,21 +118,19 @@
     <EditText
         android:id="@+id/minTemp"
         android:layout_width="50dp"
-        android:layout_height="44dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginLeft="32dp"
+        android:layout_height="50dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginRight="32dp"
         android:ems="10"
         android:hint="Min."
         android:inputType="numberDecimal"
         app:layout_constraintBaseline_toBaselineOf="@+id/maxTemp"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintEnd_toStartOf="@+id/maxTemp" />
 
     <EditText
         android:id="@+id/maxTemp"
-        android:layout_width="54dp"
-        android:layout_height="43dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginLeft="32dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:layout_marginTop="32dp"
         android:layout_marginEnd="32dp"
         android:layout_marginRight="32dp"
@@ -125,24 +138,47 @@
         android:hint="Max."
         android:inputType="numberDecimal"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/minTemp"
-        app:layout_constraintTop_toBottomOf="@+id/weatherType" />
+        app:layout_constraintTop_toBottomOf="@+id/weatherTypeSpin" />
 
     <EditText
-        android:id="@+id/humidity"
-        android:layout_width="103dp"
-        android:layout_height="42dp"
+        android:id="@+id/minHumid"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginRight="32dp"
+        android:ems="10"
+        android:hint="Min."
+        android:inputType="numberDecimal"
+        app:layout_constraintEnd_toStartOf="@+id/maxHumid"
+        app:layout_constraintTop_toBottomOf="@+id/minTemp" />
+
+    <EditText
+        android:id="@+id/maxHumid"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginRight="32dp"
+        android:ems="10"
+        android:hint="Max."
+        android:inputType="number"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/maxTemp" />
+
+    <TextView
+        android:id="@+id/temperature"
+        android:layout_width="150dp"
+        android:layout_height="50dp"
         android:layout_marginStart="32dp"
         android:layout_marginLeft="32dp"
         android:layout_marginTop="32dp"
-        android:layout_marginEnd="48dp"
-        android:layout_marginRight="48dp"
-        android:ems="10"
-        android:hint="Humidity"
-        android:inputType="numberDecimal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/maxTemp"
-        app:layout_constraintTop_toBottomOf="@+id/weatherType" />
+        android:layout_marginEnd="32dp"
+        android:layout_marginRight="32dp"
+        android:text="Temperature"
+        app:layout_constraintEnd_toStartOf="@+id/minTemp"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/weatherTypeSpin" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

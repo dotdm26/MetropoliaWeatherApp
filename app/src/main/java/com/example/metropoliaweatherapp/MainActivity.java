@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.TextView;
 import android.os.Bundle;
 
@@ -19,8 +18,6 @@ public class MainActivity extends AppCompatActivity {
      * Calendar button to review past dates' information
      */
 
-    TextView dayVerdict;
-    TextView weatherData;
     Button calendarButton;
     Button userButton;
 
