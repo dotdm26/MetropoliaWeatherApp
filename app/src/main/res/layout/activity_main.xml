@@ -18,26 +18,9 @@
         android:text="Is it a nice day?"
         android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/weatherData"
-        android:layout_width="433dp"
-        android:layout_height="317dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginLeft="32dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="32dp"
-        android:layout_marginRight="32dp"
-        android:text="Weather data"
-        android:textSize="24sp"
-        app:layout_constraintBottom_toTopOf="@+id/locationButton"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/dayVerdict"
-        app:layout_constraintVertical_bias="0.2" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/locationButton"
@@ -70,18 +53,19 @@
         app:layout_constraintBaseline_toBaselineOf="@+id/locationButton"
         app:layout_constraintEnd_toEndOf="parent" />
 
-    <Spinner
-        android:id="@+id/activitySpinner"
-        android:layout_width="441dp"
-        android:layout_height="45dp"
+    <TextView
+        android:id="@+id/weatherData"
+        android:layout_width="0dp"
+        android:layout_height="226dp"
         android:layout_marginStart="32dp"
         android:layout_marginLeft="32dp"
         android:layout_marginTop="32dp"
         android:layout_marginEnd="32dp"
         android:layout_marginRight="32dp"
+        android:text="TextView"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.719"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/weatherData" />
+        app:layout_constraintTop_toBottomOf="@+id/dayVerdict" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
