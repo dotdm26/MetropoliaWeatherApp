@@ -28,7 +28,7 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <Spinner
-        android:id="@+id/spinner2"
+        android:id="@+id/pastPrefSpin"
         android:layout_width="380dp"
         android:layout_height="51dp"
         android:layout_marginStart="32dp"
@@ -36,22 +36,26 @@
         android:layout_marginTop="32dp"
         android:layout_marginEnd="32dp"
         android:layout_marginRight="32dp"
+        android:layout_marginBottom="32dp"
+        app:layout_constraintBottom_toTopOf="@+id/pastVerdict"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/calendarView" />
 
     <TextView
         android:id="@+id/pastVerdict"
-        android:layout_width="379dp"
-        android:layout_height="53dp"
+        android:layout_width="377dp"
+        android:layout_height="75dp"
         android:layout_marginStart="32dp"
         android:layout_marginLeft="32dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="128dp"
         android:layout_marginEnd="32dp"
         android:layout_marginRight="32dp"
         android:text="TextView"
-        android:textSize="30sp"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/returnButton"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.533"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spinner2" />
+        app:layout_constraintTop_toBottomOf="@+id/calendarView" />
 </androidx.constraintlayout.widget.ConstraintLayout>
