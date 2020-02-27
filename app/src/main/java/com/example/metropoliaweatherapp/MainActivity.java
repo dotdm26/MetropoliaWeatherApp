@@ -18,8 +18,14 @@ public class MainActivity extends AppCompatActivity {
      * Calendar button to review past dates' information
      */
 
-    Button calendarButton;
-    Button userButton;
+    private Button calendarButton;
+    private Button userButton;
+    private View.OnClickListener clickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            startActivity(new Intent(getApplicationContext(), view.getId() == R.id.calendarButton ? calendarActivity.class : PreferencesActivity.class));
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,29 +33,10 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         userButton = findViewById(R.id.userButton);
-        userButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                openPreferences();
-            }
-        });
+        userButton.setOnClickListener(clickListener);
 
         calendarButton = findViewById(R.id.calendarButton);
-        calendarButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                openCalendar();
-            }
-        });
+        calendarButton.setOnClickListener(clickListener);
     }
 
-    public void openPreferences() {
-        Intent pref = new Intent(this, PreferencesActivity.class);
-        startActivity(pref);
-    }
-
-    public void openCalendar() {
-        Intent calendar = new Intent(this, calendarActivity.class);
-        startActivity(calendar);
-    }
 }
