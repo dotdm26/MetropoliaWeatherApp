@@ -23,6 +23,7 @@ public class calendarActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_calendar);
 
+        //Button to return to main activity
         returnButton = findViewById(R.id.returnButton);
         returnButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -32,6 +33,7 @@ public class calendarActivity extends AppCompatActivity {
         });
     }
 
+    //
     public void returnMain() {
         Intent main = new Intent(this, MainActivity.class);
         startActivity(main);

@@ -14,7 +14,7 @@ public class MainActivity extends AppCompatActivity {
      * Big message displaying "nice day" or "not a nice day".
      * Followed by a few details about the weather.
      * A spinner to select a specific activity (that comes with the preferred weather, ...)
-     * Location button to locate the user and get the weather data
+     * Location button to locate the user and get the weather data?
      * Calendar button to review past dates' information
      */
 
