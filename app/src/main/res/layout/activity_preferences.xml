@@ -8,6 +8,26 @@
     android:layout_height="match_parent"
     tools:context=".calendarActivity">
 
+    <EditText
+        android:id="@+id/prefLocation"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginLeft="32dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginRight="32dp"
+        android:layout_marginBottom="16dp"
+        android:ems="10"
+        android:hint="Location (City)"
+        android:inputType="textPersonName"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toTopOf="@+id/returnButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/minHumid" />
+
     <TextView
         android:id="@+id/humidity"
         android:layout_width="wrap_content"
@@ -75,7 +95,7 @@
     <TextView
         android:id="@+id/savedPrefDetails"
         android:layout_width="0dp"
-        android:layout_height="125dp"
+        android:layout_height="80dp"
         android:layout_marginStart="32dp"
         android:layout_marginLeft="32dp"
         android:layout_marginTop="16dp"
