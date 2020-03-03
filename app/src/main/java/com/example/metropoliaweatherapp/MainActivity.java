@@ -3,11 +3,17 @@ package com.example.metropoliaweatherapp;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.os.Bundle;
 
+import java.io.IOException;
+
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.select.Elements;
 
 public class MainActivity extends AppCompatActivity {
     /**
@@ -20,6 +26,8 @@ public class MainActivity extends AppCompatActivity {
 
     private Button calendarButton;
     private Button userButton;
+    private Elements source;
+    private TextView parse;
     private View.OnClickListener clickListener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
@@ -34,9 +42,31 @@ public class MainActivity extends AppCompatActivity {
 
         userButton = findViewById(R.id.userButton);
         userButton.setOnClickListener(clickListener);
+        parse = findViewById(R.id.weatherData);
 
         calendarButton = findViewById(R.id.calendarButton);
         calendarButton.setOnClickListener(clickListener);
+
+        new doIt().execute();
+    }
+
+    public class doIt extends AsyncTask<Void, Void,Void> {
+        @Override
+        protected Void doInBackground(Void... voids) {
+            try {
+                Document doc = Jsoup.connect("https://www.bbc.com/weather/658225").get();
+                source = doc.getElementsByClass("wr-value--temperature--c");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+            parse.setText(source.get(0).text());
+        }
     }
 
 }
