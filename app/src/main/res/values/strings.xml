@@ -17,12 +17,5 @@
         <item>Foggy</item>
         <item>Snowy</item>
     </string-array>
-    
-    <string-array name="question1">
-        <item>Answer</item>
-        <item>Answer</item>
-        <item>Answer</item>
-        <item>Answer</item>
-        <item>Answer</item>
-    </string-array>
+
 </resources>
