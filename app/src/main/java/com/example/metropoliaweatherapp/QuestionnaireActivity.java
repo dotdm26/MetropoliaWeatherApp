@@ -12,6 +12,10 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 public class QuestionnaireActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
+    /**
+     * A questionnaire that pops up when the user opens the app for the first time.
+     */
+
     private Button saveButton;
 
     public static final String SH_PR = "shPr";
@@ -30,7 +34,7 @@ public class QuestionnaireActivity extends AppCompatActivity implements AdapterV
         spinner1.setAdapter(adapter);
         spinner1.setOnItemSelectedListener(this);
 
-        saveButton = (Button) findViewById(R.id.saveButton);
+        saveButton = findViewById(R.id.saveButton);
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

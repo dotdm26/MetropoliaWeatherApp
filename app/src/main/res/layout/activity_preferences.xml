@@ -6,6 +6,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".calendarActivity">
 
     <EditText
@@ -26,22 +27,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/minHumid" />
-
-    <TextView
-        android:id="@+id/humidity"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginLeft="32dp"
-        android:layout_marginTop="16dp"
-        android:text="Humidity (%)"
-        app:layout_constraintBottom_toTopOf="@+id/returnButton"
-        app:layout_constraintEnd_toStartOf="@+id/minHumid"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/temperature"
-        app:layout_constraintVertical_bias="0.183" />
+        app:layout_constraintTop_toBottomOf="@+id/temperature" />
 
     <Button
         android:id="@+id/returnButton"
@@ -60,12 +46,11 @@
         android:id="@+id/prefRemoveButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
         android:layout_marginEnd="32dp"
         android:layout_marginRight="32dp"
         android:text="Remove"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/savedPrefDetails" />
+        app:layout_constraintBaseline_toBaselineOf="@+id/prefDisplayButton"
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <Button
         android:id="@+id/prefAddButton"
@@ -77,20 +62,6 @@
         android:text="Add"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
-
-    <Spinner
-        android:id="@+id/savedPrefs"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginLeft="32dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="32dp"
-        android:layout_marginRight="32dp"
-        android:spinnerMode="dropdown"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/savedPrefDetails"
@@ -104,7 +75,7 @@
         android:text="Saved preferences details"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/savedPrefs" />
+        app:layout_constraintTop_toBottomOf="@+id/listofPrefs" />
 
     <EditText
         android:id="@+id/newPref"
@@ -166,32 +137,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/weatherTypeSpin" />
 
-    <EditText
-        android:id="@+id/minHumid"
-        android:layout_width="50dp"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="32dp"
-        android:layout_marginRight="32dp"
-        android:ems="10"
-        android:hint="Min."
-        android:inputType="numberDecimal"
-        android:textSize="14sp"
-        app:layout_constraintBaseline_toBaselineOf="@+id/humidity"
-        app:layout_constraintEnd_toStartOf="@+id/maxHumid" />
-
-    <EditText
-        android:id="@+id/maxHumid"
-        android:layout_width="50dp"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="32dp"
-        android:layout_marginRight="32dp"
-        android:ems="10"
-        android:hint="Max."
-        android:inputType="number"
-        android:textSize="14sp"
-        app:layout_constraintBaseline_toBaselineOf="@+id/minHumid"
-        app:layout_constraintEnd_toEndOf="parent" />
-
     <TextView
         android:id="@+id/temperature"
         android:layout_width="wrap_content"
@@ -205,6 +150,30 @@
         app:layout_constraintEnd_toStartOf="@+id/minTemp"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/prefDisplayButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginLeft="32dp"
+        android:layout_marginTop="16dp"
+        android:text="Display"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/savedPrefDetails" />
+
+    <ListView
+        android:id="@+id/listofPrefs"
+        android:layout_width="0dp"
+        android:layout_height="70dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginLeft="32dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginRight="32dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
