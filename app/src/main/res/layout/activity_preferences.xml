@@ -9,6 +9,20 @@
     android:orientation="vertical"
     tools:context=".calendarActivity">
 
+    <Button
+        android:id="@+id/prefDisplayButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginLeft="32dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:text="View List of Preferences"
+        app:layout_constraintEnd_toStartOf="@+id/prefAddButton"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/prefLocation" />
+
     <EditText
         android:id="@+id/prefLocation"
         android:layout_width="0dp"
@@ -18,12 +32,10 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="32dp"
         android:layout_marginRight="32dp"
-        android:layout_marginBottom="16dp"
         android:ems="10"
         android:hint="Location (City)"
         android:inputType="textPersonName"
         android:textSize="14sp"
-        app:layout_constraintBottom_toTopOf="@+id/returnButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -35,47 +47,26 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
         android:layout_marginLeft="32dp"
+        android:layout_marginTop="16dp"
         android:layout_marginBottom="32dp"
         android:text="Return"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <Button
-        android:id="@+id/prefRemoveButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="32dp"
-        android:layout_marginRight="32dp"
-        android:text="Remove"
-        app:layout_constraintBaseline_toBaselineOf="@+id/prefDisplayButton"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/prefDisplayButton"
+        app:layout_constraintVertical_bias="1.0" />
 
     <Button
         android:id="@+id/prefAddButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="32dp"
-        android:layout_marginRight="32dp"
-        android:layout_marginBottom="32dp"
-        android:text="Add"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
-
-    <TextView
-        android:id="@+id/savedPrefDetails"
-        android:layout_width="0dp"
-        android:layout_height="80dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginLeft="32dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="32dp"
         android:layout_marginRight="32dp"
-        android:text="Saved preferences details"
+        android:text="Add"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/listofPrefs" />
+        app:layout_constraintTop_toBottomOf="@+id/prefLocation" />
 
     <EditText
         android:id="@+id/newPref"
@@ -83,7 +74,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
         android:layout_marginLeft="32dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="32dp"
         android:layout_marginEnd="32dp"
         android:layout_marginRight="32dp"
         android:ems="10"
@@ -92,26 +83,10 @@
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/prefRemoveButton" />
-
-    <Spinner
-        android:id="@+id/weatherTypeSpin"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginLeft="32dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="32dp"
-        android:layout_marginRight="32dp"
-        android:layout_marginBottom="16dp"
-        app:layout_constraintBottom_toTopOf="@+id/minTemp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.487"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/newPref" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/minTemp"
+        android:id="@+id/maxTemp"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_marginEnd="32dp"
@@ -120,11 +95,11 @@
         android:hint="Min."
         android:inputType="numberDecimal"
         android:textSize="14sp"
-        app:layout_constraintBaseline_toBaselineOf="@+id/maxTemp"
-        app:layout_constraintEnd_toStartOf="@+id/maxTemp" />
+        app:layout_constraintBaseline_toBaselineOf="@+id/minTemp"
+        app:layout_constraintEnd_toStartOf="@+id/minTemp" />
 
     <EditText
-        android:id="@+id/maxTemp"
+        android:id="@+id/minTemp"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_marginTop="16dp"
@@ -135,7 +110,7 @@
         android:inputType="numberDecimal"
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/weatherTypeSpin" />
+        app:layout_constraintTop_toBottomOf="@+id/weatherType" />
 
     <TextView
         android:id="@+id/temperature"
@@ -146,34 +121,27 @@
         android:layout_marginEnd="32dp"
         android:layout_marginRight="32dp"
         android:text="Temperature (°C)"
-        app:layout_constraintBaseline_toBaselineOf="@+id/minTemp"
-        app:layout_constraintEnd_toStartOf="@+id/minTemp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/maxTemp"
+        app:layout_constraintEnd_toStartOf="@+id/maxTemp"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <Button
-        android:id="@+id/prefDisplayButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginLeft="32dp"
-        android:layout_marginTop="16dp"
-        android:text="Display"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/savedPrefDetails" />
-
-    <ListView
-        android:id="@+id/listofPrefs"
+    <EditText
+        android:id="@+id/weatherType"
         android:layout_width="0dp"
-        android:layout_height="70dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
         android:layout_marginLeft="32dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="32dp"
         android:layout_marginRight="32dp"
+        android:ems="10"
+        android:hint="Weather Type (e.g. Sunny, Rainy, ...)"
+        android:inputType="textPersonName"
+        android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/newPref" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
