@@ -2,6 +2,7 @@ package com.example.metropoliaweatherapp;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -18,7 +19,7 @@ public class QuestionnaireActivity extends AppCompatActivity implements AdapterV
     public EditText editText;
     public Button saveButton;
     public EditText editText3;
-    public Spinner spinner3;
+    public Spinner editText2;
 
 
     public static final String SH_PR = "shPr";
@@ -27,6 +28,7 @@ public class QuestionnaireActivity extends AppCompatActivity implements AdapterV
 
     public String text;
 
+    @SuppressLint("WrongViewCast")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,14 +38,8 @@ public class QuestionnaireActivity extends AppCompatActivity implements AdapterV
         editText =  findViewById(R.id.editText);
         saveButton = findViewById(R.id.saveButton);
         editText3 = findViewById(R.id.editText3);
-        spinner3 = findViewById(R.id.spinner3);
+        //editText2 = findViewById(R.id.editText2);
 
-
-        Spinner spinner1 = findViewById(R.id.spinner3);
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.weather_types, android.R.layout.simple_spinner_item);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner1.setAdapter(adapter);
-        spinner1.setOnItemSelectedListener(this);
 
         saveButton = findViewById(R.id.saveButton);
         saveButton.setOnClickListener(new View.OnClickListener() {
