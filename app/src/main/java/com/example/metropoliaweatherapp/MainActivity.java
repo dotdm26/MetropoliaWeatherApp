@@ -26,14 +26,9 @@ public class MainActivity extends AppCompatActivity {
 
     private Button calendarButton;
     private Button userButton;
+    private Button listButton;
     private Elements source;
     private TextView parse;
-    private View.OnClickListener clickListener = new View.OnClickListener() {
-        @Override
-        public void onClick(View view) {
-            startActivity(new Intent(getApplicationContext(), view.getId() == R.id.calendarButton ? calendarActivity.class : PreferencesActivity.class));
-        }
-    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,13 +36,46 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         userButton = findViewById(R.id.userButton);
-        userButton.setOnClickListener(clickListener);
-        parse = findViewById(R.id.weatherData);
+        userButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                prefAdd();
+            }
+        });
+
+        listButton = findViewById(R.id.listButton);
+        listButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                lvPrefs();
+            }
+        });
 
         calendarButton = findViewById(R.id.calendarButton);
-        calendarButton.setOnClickListener(clickListener);
+        calendarButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                calendar();
+            }
+        });
 
+        parse = findViewById(R.id.weatherData);
         new doIt().execute();
+    }
+
+    public void prefAdd() {
+        Intent pref = new Intent(this, PreferencesActivity.class);
+        startActivity(pref);
+    }
+
+    public void calendar() {
+        Intent cal = new Intent(this, calendarActivity.class);
+        startActivity(cal);
+    }
+
+    public void lvPrefs() {
+        Intent list = new Intent(this, listSavedPrefsActivity.class);
+        startActivity(list);
     }
 
     public class doIt extends AsyncTask<Void, Void,Void> {
@@ -68,5 +96,4 @@ public class MainActivity extends AppCompatActivity {
             parse.setText(source.get(0).text());
         }
     }
-
 }

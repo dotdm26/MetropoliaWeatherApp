@@ -4,12 +4,12 @@ import java.util.ArrayList;
 
 public class Preference {
     public String name;
-    public double minTemp;
-    public double maxTemp;
+    public int minTemp;
+    public int maxTemp;
     public String location;
     public String weatherType;
 
-    public Preference(String name, double minTemp, double maxTemp, String location, String weatherType) {
+    public Preference(String name, int minTemp, int maxTemp, String location, String weatherType) {
         ArrayList<Preference> preferences = new ArrayList<>();
 
         this.name = name;
@@ -23,11 +23,11 @@ public class Preference {
         return name;
     }
 
-    public double getMinTemp() {
+    public int getMinTemp() {
         return minTemp;
     }
 
-    public double getMaxTemp() {
+    public int getMaxTemp() {
         return maxTemp;
     }
 

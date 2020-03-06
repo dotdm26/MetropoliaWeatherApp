@@ -23,11 +23,11 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/locationButton"
+        android:id="@+id/listButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="60dp"
-        android:text="Location"
+        android:text="List"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/calendarButton"
         app:layout_constraintHorizontal_bias="0.522"
@@ -40,7 +40,7 @@
         android:layout_marginStart="32dp"
         android:layout_marginLeft="32dp"
         android:text="Settings"
-        app:layout_constraintBaseline_toBaselineOf="@+id/locationButton"
+        app:layout_constraintBaseline_toBaselineOf="@+id/listButton"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
@@ -50,7 +50,7 @@
         android:layout_marginEnd="32dp"
         android:layout_marginRight="32dp"
         android:text="Calendar"
-        app:layout_constraintBaseline_toBaselineOf="@+id/locationButton"
+        app:layout_constraintBaseline_toBaselineOf="@+id/listButton"
         app:layout_constraintEnd_toEndOf="parent" />
 
     <TextView
