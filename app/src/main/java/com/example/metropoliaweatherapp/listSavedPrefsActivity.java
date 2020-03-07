@@ -83,7 +83,7 @@ public class listSavedPrefsActivity extends AppCompatActivity {
 
     //Opens MainActivity.java
     public void returnHome() {
-        Intent list = new Intent(this, listSavedPrefsActivity.class);
+        Intent list = new Intent(this, MainActivity.class);
         startActivity(list);
     }
 
