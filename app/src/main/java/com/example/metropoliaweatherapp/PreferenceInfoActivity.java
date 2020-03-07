@@ -4,7 +4,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.preference.PreferenceActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -42,11 +41,19 @@ public class PreferenceInfoActivity extends AppCompatActivity {
             }
         });
 
+        removeBt = findViewById(R.id.removeButton);
+        removeBt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+
         int i = getIntent().getIntExtra("EXTRA", 0);
         Log.d("Test", Integer.toString(i));
         name.setText(GlobalModel.getInstance().getPreferences().get(i).getName());
-        min.setText(Integer.toString(GlobalModel.getInstance().getPreferences().get(i).getMinTemp()));
-        max.setText(Integer.toString(GlobalModel.getInstance().getPreferences().get(i).getMaxTemp()));
+        min.setText((GlobalModel.getInstance().getPreferences().get(i).getMinTemp()) + "°C");
+        max.setText((GlobalModel.getInstance().getPreferences().get(i).getMaxTemp()) + "°C");
         location.setText(GlobalModel.getInstance().getPreferences().get(i).getLocation());
         weather.setText(GlobalModel.getInstance().getPreferences().get(i).getWeatherType());
     }
@@ -59,5 +66,9 @@ public class PreferenceInfoActivity extends AppCompatActivity {
     public void returnList() {
         Intent list = new Intent(this, listSavedPrefsActivity.class);
         startActivity(list);
+    }
+
+    public void removePref() {
+
     }
 }
