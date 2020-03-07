@@ -10,7 +10,6 @@ public class Preference {
     public String weatherType;
 
     public Preference(String name, int minTemp, int maxTemp, String location, String weatherType) {
-        ArrayList<Preference> preferences = new ArrayList<>();
 
         this.name = name;
         this.minTemp = minTemp;
