@@ -12,7 +12,7 @@ import android.widget.TextView;
 public class PreferenceInfoActivity extends AppCompatActivity {
 
     private TextView name, min, max, location, weather;
-    Button returnBt, prefBt, removeBt;
+    Button listBt, removeBt;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,22 +25,16 @@ public class PreferenceInfoActivity extends AppCompatActivity {
         location = findViewById(R.id.location);
         weather = findViewById(R.id.weather);
 
-        returnBt = findViewById(R.id.homeButton);
-        returnBt.setOnClickListener(new View.OnClickListener() {
+        //Button that returns to home screen
+        listBt = findViewById(R.id.listButton);
+        listBt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 returnList();
             }
         });
 
-        prefBt = findViewById(R.id.prefButton);
-        prefBt.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                returnPref();
-            }
-        });
-
+        //Button that removes the preference (TO DO!!!)
         removeBt = findViewById(R.id.removeButton);
         removeBt.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -49,6 +43,7 @@ public class PreferenceInfoActivity extends AppCompatActivity {
             }
         });
 
+        //Displays detailed info of preference
         int i = getIntent().getIntExtra("EXTRA", 0);
         Log.d("Test", Integer.toString(i));
         name.setText(GlobalModel.getInstance().getPreferences().get(i).getName());
@@ -58,17 +53,16 @@ public class PreferenceInfoActivity extends AppCompatActivity {
         weather.setText(GlobalModel.getInstance().getPreferences().get(i).getWeatherType());
     }
 
-    public void returnPref() {
-        Intent pref = new Intent(this, PreferencesActivity.class);
-        startActivity(pref);
-    }
 
+    //Returns to list of preference
     public void returnList() {
         Intent list = new Intent(this, listSavedPrefsActivity.class);
         startActivity(list);
     }
 
     public void removePref() {
-
+        /**
+         * TO DO: FIND A WAY TO REMOVE SELECTED PREFERENCE
+         */
     }
 }

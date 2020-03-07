@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -23,7 +22,7 @@ public class PreferencesActivity extends AppCompatActivity {
     /**
      * An activity where the user can create new weather preferences for a specific activity (to be named by the user)
      * Add/Remove activities
-     * Name, weather description, temperature, humidity, location? and etc.
+     * Name, weather description, temperature, location and etc.
      *
      * TO DO LIST:
      * - Find a way to index each saved preferences (0; 1; 2; ...)
@@ -36,7 +35,7 @@ public class PreferencesActivity extends AppCompatActivity {
     TextView prefLocation;
     TextView minTemp;
     TextView maxTemp;
-    Button returnButton;
+    Button homeButton;
     Button addPrefButton;
     Button prefDisplay;
 
@@ -52,49 +51,57 @@ public class PreferencesActivity extends AppCompatActivity {
 
 
         //Button to return to main activity
-        returnButton = findViewById(R.id.homeButton);
-        returnButton.setOnClickListener(new View.OnClickListener() {
+        homeButton = findViewById(R.id.listButton);
+        homeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                returnMain();
+                returnHome();
             }
         });
 
+        //Button to add pref
         addPrefButton = findViewById(R.id.prefAddButton);
         addPrefButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                //Verifies whether all of the fields are filled or not
+                /**
+                 * TO DO: Convert the Min temp and Max temp to integers, and make sure Max >= Min
+                 * otherwise we get a Toast that says something like
+                 * "Make sure your maximum temp is bigger than or equal to your minimum temp!"
+                 */
                 if (newPref.getText().toString().isEmpty() || weatherType.getText().toString().isEmpty() || prefLocation.getText().toString().isEmpty() || minTemp.getText().toString().isEmpty() || maxTemp.getText().toString().isEmpty()) {
                     toastNo();
-                    Log.d("Test", "Reacted");
                 } else {
                     prefAdd();
                     toastYes();
-                    Log.d("Test2", "Reacted");
                 }
             }
         });
 
+        //Allows the user to view the list of saved preferences
         prefDisplay = findViewById(R.id.prefDisplayButton);
         prefDisplay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 lvPrefs();
-                Log.d("Display List", "Reacted");
             }
         });
     }
 
+    //Opens new activity (List of preferences)
     public void lvPrefs() {
         Intent list = new Intent(this, listSavedPrefsActivity.class);
         startActivity(list);
     }
 
-    public void returnMain() {
-        Intent main = new Intent(this, MainActivity.class);
-        startActivity(main);
+    //Opens new activity (Main Activity)
+    public void returnHome() {
+        Intent home = new Intent(this, MainActivity.class);
+        startActivity(home);
     }
 
+    //Adds preference
     public void prefAdd() {
         SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
@@ -116,10 +123,12 @@ public class PreferencesActivity extends AppCompatActivity {
         preference.prefAdd(new Preference(name, minTemp, maxTemp, location, weatherType));
     }
 
+    //Toast confirming the addition of preference
     public void toastYes() {
         Toast.makeText(this, "User preferences have been saved", Toast.LENGTH_SHORT).show();
     }
 
+    //Toast informing the user to fill out the preference's form if user clicks "Add" without filling them
     public void toastNo() {
         Toast.makeText(this, "Please fill out all required fields!", Toast.LENGTH_SHORT).show();
     }
