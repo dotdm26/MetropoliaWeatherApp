@@ -24,7 +24,7 @@ public class calendarActivity extends AppCompatActivity {
         setContentView(R.layout.activity_calendar);
 
         //Button to return to main activity
-        returnButton = findViewById(R.id.listButton);
+        returnButton = findViewById(R.id.homeButton);
         returnButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

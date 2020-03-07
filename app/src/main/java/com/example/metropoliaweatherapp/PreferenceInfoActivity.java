@@ -25,7 +25,7 @@ public class PreferenceInfoActivity extends AppCompatActivity {
         location = findViewById(R.id.location);
         weather = findViewById(R.id.weather);
 
-        returnBt = findViewById(R.id.listButton);
+        returnBt = findViewById(R.id.homeButton);
         returnBt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

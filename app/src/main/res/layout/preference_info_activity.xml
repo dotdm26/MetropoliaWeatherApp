@@ -72,7 +72,7 @@
         app:layout_constraintTop_toBottomOf="@+id/location" />
 
     <Button
-        android:id="@+id/listButton"
+        android:id="@+id/homeButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
@@ -105,5 +105,5 @@
         android:text="Prefs"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/removeButton"
-        app:layout_constraintStart_toEndOf="@+id/listButton" />
+        app:layout_constraintStart_toEndOf="@+id/homeButton" />
 </androidx.constraintlayout.widget.ConstraintLayout>

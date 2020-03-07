@@ -17,8 +17,8 @@ public class PreferencesActivity extends AppCompatActivity {
     public static final String SHARED_PREFS = "SHARED PREFERENCES";
     public static final String PREF_NAME = "PREFERENCE NAME";
     public static final String WEATHER = "WEATHER TYPE";
-    public static String MIN_TEMP = "MINIMUM TEMPERATURE";
-    public static String MAX_TEMP = "MAXIMUM TEMPERATURE";
+    public static final String MIN_TEMP = "MINIMUM TEMPERATURE";
+    public static final String MAX_TEMP = "MAXIMUM TEMPERATURE";
     public static final String LOCATION = "LOCATION";
     /**
      * An activity where the user can create new weather preferences for a specific activity (to be named by the user)
@@ -26,9 +26,9 @@ public class PreferencesActivity extends AppCompatActivity {
      * Name, weather description, temperature, humidity, location? and etc.
      *
      * TO DO LIST:
-     * - Store user preferences
-     *
-     * - Make sure the stored preferences also work in other activities.
+     * - Find a way to index each saved preferences (0; 1; 2; ...)
+     * so that we can be able to recognize and have the option to delete the preference
+     * later??
      */
 
     TextView newPref;
@@ -39,7 +39,6 @@ public class PreferencesActivity extends AppCompatActivity {
     Button returnButton;
     Button addPrefButton;
     Button prefDisplay;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,7 +52,7 @@ public class PreferencesActivity extends AppCompatActivity {
 
 
         //Button to return to main activity
-        returnButton = findViewById(R.id.listButton);
+        returnButton = findViewById(R.id.homeButton);
         returnButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

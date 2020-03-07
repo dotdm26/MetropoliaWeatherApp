@@ -43,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        listButton = findViewById(R.id.listButton);
+        listButton = findViewById(R.id.homeButton);
         listButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

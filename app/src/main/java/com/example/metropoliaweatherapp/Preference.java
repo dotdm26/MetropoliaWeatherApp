@@ -1,7 +1,5 @@
 package com.example.metropoliaweatherapp;
 
-import java.util.ArrayList;
-
 public class Preference {
     public String name;
     public int minTemp;
@@ -10,7 +8,6 @@ public class Preference {
     public String weatherType;
 
     public Preference(String name, int minTemp, int maxTemp, String location, String weatherType) {
-
         this.name = name;
         this.minTemp = minTemp;
         this.maxTemp = maxTemp;
