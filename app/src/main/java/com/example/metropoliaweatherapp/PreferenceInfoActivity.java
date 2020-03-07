@@ -12,7 +12,7 @@ import android.widget.TextView;
 public class PreferenceInfoActivity extends AppCompatActivity {
 
     private TextView name, min, max, location, weather;
-    Button listBt, removeBt;
+    Button listBt;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,15 +34,6 @@ public class PreferenceInfoActivity extends AppCompatActivity {
             }
         });
 
-        //Button that removes the preference (TO DO!!!)
-        removeBt = findViewById(R.id.removeButton);
-        removeBt.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-            }
-        });
-
         //Displays detailed info of preference
         int i = getIntent().getIntExtra("EXTRA", 0);
         Log.d("Test", Integer.toString(i));
@@ -53,16 +44,9 @@ public class PreferenceInfoActivity extends AppCompatActivity {
         weather.setText(GlobalModel.getInstance().getPreferences().get(i).getWeatherType());
     }
 
-
     //Returns to list of preference
     public void returnList() {
         Intent list = new Intent(this, listSavedPrefsActivity.class);
         startActivity(list);
-    }
-
-    public void removePref() {
-        /**
-         * TO DO: FIND A WAY TO REMOVE SELECTED PREFERENCE
-         */
     }
 }
