@@ -1,6 +1,8 @@
 package com.example.metropoliaweatherapp;
 
-import java.util.ArrayList;
+/**
+ * For calling a preference's detailed information (name, weather type, ...)
+ */
 
 public class Preference {
     public String name;
@@ -10,8 +12,6 @@ public class Preference {
     public String weatherType;
 
     public Preference(String name, int minTemp, int maxTemp, String location, String weatherType) {
-        ArrayList<Preference> preferences = new ArrayList<>();
-
         this.name = name;
         this.minTemp = minTemp;
         this.maxTemp = maxTemp;

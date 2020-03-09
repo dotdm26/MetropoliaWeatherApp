@@ -5,41 +5,30 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import static java.lang.Integer.parseInt;
+
 public class PreferencesActivity extends AppCompatActivity {
 
     public static final String SHARED_PREFS = "SHARED PREFERENCES";
     public static final String PREF_NAME = "PREFERENCE NAME";
     public static final String WEATHER = "WEATHER TYPE";
-    public static String MIN_TEMP = "MINIMUM TEMPERATURE";
-    public static String MAX_TEMP = "MAXIMUM TEMPERATURE";
+    public static final String MIN_TEMP = "MINIMUM TEMPERATURE";
+    public static final String MAX_TEMP = "MAXIMUM TEMPERATURE";
     public static final String LOCATION = "LOCATION";
     /**
      * An activity where the user can create new weather preferences for a specific activity (to be named by the user)
      * Add/Remove activities
-     * Name, weather description, temperature, humidity, location? and etc.
-     *
-     * TO DO LIST:
-     * - Store user preferences
-     *
-     * - Make sure the stored preferences also work in other activities.
+     * Name, weather description, temperature, location and etc.
      */
 
-    TextView newPref;
-    TextView weatherType;
-    TextView prefLocation;
-    TextView minTemp;
-    TextView maxTemp;
-    Button returnButton;
-    Button addPrefButton;
-    Button prefDisplay;
-
+    TextView newPref, weatherType, prefLocation, minTemp, maxTemp;
+    Button homeButton, addPrefButton, prefDisplay;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,56 +42,62 @@ public class PreferencesActivity extends AppCompatActivity {
 
 
         //Button to return to main activity
-        returnButton = findViewById(R.id.listButton);
-        returnButton.setOnClickListener(new View.OnClickListener() {
+        homeButton = findViewById(R.id.listButton);
+        homeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                returnMain();
+                returnHome();
             }
         });
 
+        //Button to add pref
         addPrefButton = findViewById(R.id.prefAddButton);
         addPrefButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                //Verifies whether all of the fields are filled or not
+                //Also whether the min and max temperature are coherent or not (min <= max)
                 if (newPref.getText().toString().isEmpty() || weatherType.getText().toString().isEmpty() || prefLocation.getText().toString().isEmpty() || minTemp.getText().toString().isEmpty() || maxTemp.getText().toString().isEmpty()) {
                     toastNo();
-                    Log.d("Test", "Reacted");
+                } else if (Integer.parseInt(minTemp.getText().toString()) > Integer.parseInt(maxTemp.getText().toString())) {
+                    toastTempDif();
                 } else {
                     prefAdd();
                     toastYes();
-                    Log.d("Test2", "Reacted");
                 }
             }
         });
 
+        //Allows the user to view the list of saved preferences
         prefDisplay = findViewById(R.id.prefDisplayButton);
         prefDisplay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 lvPrefs();
-                Log.d("Display List", "Reacted");
             }
         });
     }
 
+    //Opens new activity (List of preferences)
     public void lvPrefs() {
         Intent list = new Intent(this, listSavedPrefsActivity.class);
         startActivity(list);
     }
 
-    public void returnMain() {
-        Intent main = new Intent(this, MainActivity.class);
-        startActivity(main);
+    //Opens new activity (Main Activity)
+    public void returnHome() {
+        Intent home = new Intent(this, MainActivity.class);
+        startActivity(home);
     }
 
+    //Adds preference
     public void prefAdd() {
         SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString(PREF_NAME, newPref.getText().toString());
         editor.putString(WEATHER, weatherType.getText().toString());
-        editor.putString(MIN_TEMP, String.valueOf(Integer.parseInt(minTemp.getText().toString())));
-        editor.putString(MAX_TEMP, String.valueOf(Integer.parseInt(maxTemp.getText().toString())));
+        editor.putString(MIN_TEMP, String.valueOf(parseInt(minTemp.getText().toString())));
+        editor.putString(MAX_TEMP, String.valueOf(parseInt(maxTemp.getText().toString())));
         editor.putString(LOCATION, prefLocation.getText().toString());
         editor.commit();
 
@@ -112,16 +107,22 @@ public class PreferencesActivity extends AppCompatActivity {
         String location = sharedPreferences.getString(LOCATION, "");
         String weatherType = sharedPreferences.getString(WEATHER, "");
         GlobalModel preference = GlobalModel.getInstance();
-        int minTemp = Integer.parseInt(minTempStr);
-        int maxTemp = Integer.parseInt(maxTempStr);
+        int minTemp = parseInt(minTempStr);
+        int maxTemp = parseInt(maxTempStr);
         preference.prefAdd(new Preference(name, minTemp, maxTemp, location, weatherType));
     }
 
+    //Toast confirming the addition of preference
     public void toastYes() {
         Toast.makeText(this, "User preferences have been saved", Toast.LENGTH_SHORT).show();
     }
 
+    //Toast informing the user to fill out the preference's form if user clicks "Add" without filling them
     public void toastNo() {
         Toast.makeText(this, "Please fill out all required fields!", Toast.LENGTH_SHORT).show();
+    }
+
+    public void toastTempDif() {
+        Toast.makeText(this, "Make sure the maximum temperature is not smaller than the minimum temperature!", Toast.LENGTH_SHORT).show();
     }
 }

@@ -4,16 +4,17 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.preference.PreferenceActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
 public class PreferenceInfoActivity extends AppCompatActivity {
-
+    /**
+     * An activity that shows details of a selected preference.
+     */
     private TextView name, min, max, location, weather;
-    Button returnBt, prefBt, removeBt;
+    Button listBt;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,41 +22,31 @@ public class PreferenceInfoActivity extends AppCompatActivity {
         setContentView(R.layout.preference_info_activity);
 
         name = findViewById(R.id.prefName);
-        min = findViewById(R.id.maxTemp);
-        max = findViewById(R.id.minTemp);
+        min = findViewById(R.id.minTemp);
+        max = findViewById(R.id.maxTemp);
         location = findViewById(R.id.location);
         weather = findViewById(R.id.weather);
 
-        returnBt = findViewById(R.id.listButton);
-        returnBt.setOnClickListener(new View.OnClickListener() {
+        //Button that returns to list screen
+        listBt = findViewById(R.id.listButton);
+        listBt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 returnList();
             }
         });
 
-        prefBt = findViewById(R.id.prefButton);
-        prefBt.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                returnPref();
-            }
-        });
-
+        //Displays detailed info of preference and puts them in the PlainText boxes
         int i = getIntent().getIntExtra("EXTRA", 0);
         Log.d("Test", Integer.toString(i));
         name.setText(GlobalModel.getInstance().getPreferences().get(i).getName());
-        min.setText(Integer.toString(GlobalModel.getInstance().getPreferences().get(i).getMinTemp()));
-        max.setText(Integer.toString(GlobalModel.getInstance().getPreferences().get(i).getMaxTemp()));
+        min.setText((GlobalModel.getInstance().getPreferences().get(i).getMinTemp()) + "°C");
+        max.setText((GlobalModel.getInstance().getPreferences().get(i).getMaxTemp()) + "°C");
         location.setText(GlobalModel.getInstance().getPreferences().get(i).getLocation());
         weather.setText(GlobalModel.getInstance().getPreferences().get(i).getWeatherType());
     }
 
-    public void returnPref() {
-        Intent pref = new Intent(this, PreferencesActivity.class);
-        startActivity(pref);
-    }
-
+    //Returns to list of preference
     public void returnList() {
         Intent list = new Intent(this, listSavedPrefsActivity.class);
         startActivity(list);

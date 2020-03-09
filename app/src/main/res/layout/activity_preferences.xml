@@ -11,18 +11,13 @@
 
     <Button
         android:id="@+id/prefDisplayButton"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
         android:layout_marginLeft="32dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="32dp"
-        android:layout_marginRight="32dp"
-        android:text="View List of Preferences"
-        app:layout_constraintEnd_toStartOf="@+id/prefAddButton"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/prefLocation" />
+        android:text="List"
+        app:layout_constraintBaseline_toBaselineOf="@+id/listButton"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
         android:id="@+id/prefLocation"
@@ -40,20 +35,18 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/maxTemp" />
+        app:layout_constraintTop_toBottomOf="@+id/minTemp" />
 
     <Button
         android:id="@+id/listButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginLeft="32dp"
-        android:layout_marginBottom="32dp"
-        android:text="Return"
+        android:layout_marginEnd="32dp"
+        android:layout_marginRight="32dp"
+        android:layout_marginBottom="16dp"
+        android:text="Home"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <Button
         android:id="@+id/prefAddButton"
@@ -76,7 +69,7 @@
         android:layout_marginEnd="32dp"
         android:layout_marginRight="32dp"
         android:ems="10"
-        android:hint="New Preference"
+        android:hint="Name of new preference"
         android:inputType="textPersonName"
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -107,24 +100,12 @@
         android:layout_marginEnd="32dp"
         android:layout_marginRight="32dp"
         android:ems="10"
-        android:hint="Weather Type (e.g. Sunny, Rainy, ...)"
+        android:hint="Weather type (e.g. Sunny, Rainy, ...)"
         android:inputType="textPersonName"
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/newPref" />
-
-    <EditText
-        android:id="@+id/maxTemp"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginEnd="32dp"
-        android:layout_marginRight="32dp"
-        android:ems="10"
-        android:hint="Min."
-        android:inputType="numberSigned"
-        app:layout_constraintBaseline_toBaselineOf="@+id/temperature"
-        app:layout_constraintEnd_toStartOf="@+id/minTemp" />
 
     <EditText
         android:id="@+id/minTemp"
@@ -133,9 +114,21 @@
         android:layout_marginEnd="32dp"
         android:layout_marginRight="32dp"
         android:ems="10"
+        android:hint="Min."
+        android:inputType="numberSigned"
+        app:layout_constraintBaseline_toBaselineOf="@+id/temperature"
+        app:layout_constraintEnd_toStartOf="@+id/maxTemp" />
+
+    <EditText
+        android:id="@+id/maxTemp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginRight="32dp"
+        android:ems="10"
         android:hint="Max."
         android:inputType="numberSigned"
-        app:layout_constraintBaseline_toBaselineOf="@+id/maxTemp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/minTemp"
         app:layout_constraintEnd_toEndOf="parent" />
 
     <TextView
@@ -147,7 +140,7 @@
         android:layout_marginTop="32dp"
         android:layout_marginEnd="32dp"
         android:layout_marginRight="32dp"
-        android:text="User Preferences"
+        android:text="Add a new preference"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

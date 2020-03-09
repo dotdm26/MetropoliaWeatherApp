@@ -8,7 +8,7 @@
 
     <TextView
         android:id="@+id/dayVerdict"
-        android:layout_width="205dp"
+        android:layout_width="wrap_content"
         android:layout_height="61dp"
         android:layout_marginStart="32dp"
         android:layout_marginLeft="32dp"
@@ -18,7 +18,6 @@
         android:text="Is it a nice day?"
         android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -26,7 +25,11 @@
         android:id="@+id/listButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="60dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginLeft="32dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginRight="32dp"
+        android:layout_marginBottom="16dp"
         android:text="List"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/calendarButton"
@@ -59,14 +62,14 @@
         android:layout_height="226dp"
         android:layout_marginStart="32dp"
         android:layout_marginLeft="32dp"
-        android:layout_marginTop="120dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="32dp"
         android:layout_marginRight="32dp"
         android:text="Weather data"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/dayVerdict" />
+        app:layout_constraintTop_toBottomOf="@+id/textClock" />
 
     <EditText
         android:id="@+id/textClock"
@@ -75,12 +78,15 @@
         android:layout_centerHorizontal="true"
         android:layout_marginStart="32dp"
         android:layout_marginLeft="32dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginRight="32dp"
         android:ems="10"
         android:format24Hour="EEEE, MMMM dd, yyyy h:mmaa"
         android:inputType="time"
         android:text="TextClock"
         android:textSize="30sp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/dayVerdict" />
 
