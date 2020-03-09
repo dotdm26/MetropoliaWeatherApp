@@ -11,6 +11,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import static java.lang.Integer.parseInt;
+
 public class PreferencesActivity extends AppCompatActivity {
 
     public static final String SHARED_PREFS = "SHARED PREFERENCES";
@@ -23,21 +25,10 @@ public class PreferencesActivity extends AppCompatActivity {
      * An activity where the user can create new weather preferences for a specific activity (to be named by the user)
      * Add/Remove activities
      * Name, weather description, temperature, location and etc.
-     *
-     * TO DO LIST:
-     * - Find a way to index each saved preferences (0; 1; 2; ...)
-     * so that we can be able to recognize and have the option to delete the preference
-     * later??
      */
 
-    TextView newPref;
-    TextView weatherType;
-    TextView prefLocation;
-    TextView minTemp;
-    TextView maxTemp;
-    Button homeButton;
-    Button addPrefButton;
-    Button prefDisplay;
+    TextView newPref, weatherType, prefLocation, minTemp, maxTemp;
+    Button homeButton, addPrefButton, prefDisplay;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,13 +56,11 @@ public class PreferencesActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 //Verifies whether all of the fields are filled or not
-                /**
-                 * TO DO: Convert the Min temp and Max temp to integers, and make sure Max >= Min
-                 * otherwise we get a Toast that says something like
-                 * "Make sure your maximum temp is bigger than or equal to your minimum temp!"
-                 */
+                //Also whether the min and max temperature are coherent or not (min <= max)
                 if (newPref.getText().toString().isEmpty() || weatherType.getText().toString().isEmpty() || prefLocation.getText().toString().isEmpty() || minTemp.getText().toString().isEmpty() || maxTemp.getText().toString().isEmpty()) {
                     toastNo();
+                } else if (Integer.parseInt(minTemp.getText().toString()) > Integer.parseInt(maxTemp.getText().toString())) {
+                    toastTempDif();
                 } else {
                     prefAdd();
                     toastYes();
@@ -107,8 +96,8 @@ public class PreferencesActivity extends AppCompatActivity {
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString(PREF_NAME, newPref.getText().toString());
         editor.putString(WEATHER, weatherType.getText().toString());
-        editor.putString(MIN_TEMP, String.valueOf(Integer.parseInt(minTemp.getText().toString())));
-        editor.putString(MAX_TEMP, String.valueOf(Integer.parseInt(maxTemp.getText().toString())));
+        editor.putString(MIN_TEMP, String.valueOf(parseInt(minTemp.getText().toString())));
+        editor.putString(MAX_TEMP, String.valueOf(parseInt(maxTemp.getText().toString())));
         editor.putString(LOCATION, prefLocation.getText().toString());
         editor.commit();
 
@@ -118,8 +107,8 @@ public class PreferencesActivity extends AppCompatActivity {
         String location = sharedPreferences.getString(LOCATION, "");
         String weatherType = sharedPreferences.getString(WEATHER, "");
         GlobalModel preference = GlobalModel.getInstance();
-        int minTemp = Integer.parseInt(minTempStr);
-        int maxTemp = Integer.parseInt(maxTempStr);
+        int minTemp = parseInt(minTempStr);
+        int maxTemp = parseInt(maxTempStr);
         preference.prefAdd(new Preference(name, minTemp, maxTemp, location, weatherType));
     }
 
@@ -131,5 +120,9 @@ public class PreferencesActivity extends AppCompatActivity {
     //Toast informing the user to fill out the preference's form if user clicks "Add" without filling them
     public void toastNo() {
         Toast.makeText(this, "Please fill out all required fields!", Toast.LENGTH_SHORT).show();
+    }
+
+    public void toastTempDif() {
+        Toast.makeText(this, "Make sure the maximum temperature is not smaller than the minimum temperature!", Toast.LENGTH_SHORT).show();
     }
 }

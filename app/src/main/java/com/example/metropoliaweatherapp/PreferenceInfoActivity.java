@@ -10,7 +10,9 @@ import android.widget.Button;
 import android.widget.TextView;
 
 public class PreferenceInfoActivity extends AppCompatActivity {
-
+    /**
+     * An activity that shows details of a selected preference.
+     */
     private TextView name, min, max, location, weather;
     Button listBt;
 
@@ -20,12 +22,12 @@ public class PreferenceInfoActivity extends AppCompatActivity {
         setContentView(R.layout.preference_info_activity);
 
         name = findViewById(R.id.prefName);
-        min = findViewById(R.id.maxTemp);
-        max = findViewById(R.id.minTemp);
+        min = findViewById(R.id.minTemp);
+        max = findViewById(R.id.maxTemp);
         location = findViewById(R.id.location);
         weather = findViewById(R.id.weather);
 
-        //Button that returns to home screen
+        //Button that returns to list screen
         listBt = findViewById(R.id.listButton);
         listBt.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -34,7 +36,7 @@ public class PreferenceInfoActivity extends AppCompatActivity {
             }
         });
 
-        //Displays detailed info of preference
+        //Displays detailed info of preference and puts them in the PlainText boxes
         int i = getIntent().getIntExtra("EXTRA", 0);
         Log.d("Test", Integer.toString(i));
         name.setText(GlobalModel.getInstance().getPreferences().get(i).getName());

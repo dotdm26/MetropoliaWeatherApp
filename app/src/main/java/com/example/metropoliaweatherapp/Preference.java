@@ -1,5 +1,9 @@
 package com.example.metropoliaweatherapp;
 
+/**
+ * For calling a preference's detailed information (name, weather type, ...)
+ */
+
 public class Preference {
     public String name;
     public int minTemp;

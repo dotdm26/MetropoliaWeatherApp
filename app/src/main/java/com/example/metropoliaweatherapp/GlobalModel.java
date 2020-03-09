@@ -3,6 +3,10 @@ package com.example.metropoliaweatherapp;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * GlobalModel singleton for calling the preferences.
+ */
+
 public class GlobalModel {
 
     private static final GlobalModel ourInstance = new GlobalModel();

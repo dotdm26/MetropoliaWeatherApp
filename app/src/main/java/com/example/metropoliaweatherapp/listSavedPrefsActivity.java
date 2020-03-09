@@ -18,7 +18,7 @@ public class listSavedPrefsActivity extends AppCompatActivity {
 
     Button homeButton, prefButton;
     /**
-     * Where the user can scroll through their saved preferences on a ListView.
+     * Where the user can view and delete their saved preferences on a ListView.
      */
 
     private ListView lv;
@@ -83,8 +83,8 @@ public class listSavedPrefsActivity extends AppCompatActivity {
 
     //Opens MainActivity.java
     public void returnHome() {
-        Intent list = new Intent(this, MainActivity.class);
-        startActivity(list);
+        Intent home = new Intent(this, MainActivity.class);
+        startActivity(home);
     }
 
     public void toastRemove() {
