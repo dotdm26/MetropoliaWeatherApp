@@ -16,7 +16,7 @@
         android:layout_marginStart="32dp"
         android:layout_marginLeft="32dp"
         android:layout_marginBottom="16dp"
-        android:text="List"
+        android:text="@string/prefDisplayButton"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -30,7 +30,7 @@
         android:layout_marginEnd="32dp"
         android:layout_marginRight="32dp"
         android:ems="10"
-        android:hint="Location (City)"
+        android:hint="@string/prefLocation"
         android:inputType="textPersonName"
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -45,7 +45,7 @@
         android:layout_marginEnd="32dp"
         android:layout_marginRight="32dp"
         android:layout_marginBottom="16dp"
-        android:text="Home"
+        android:text="@string/homeButton"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
@@ -56,7 +56,7 @@
         android:layout_marginTop="32dp"
         android:layout_marginEnd="32dp"
         android:layout_marginRight="32dp"
-        android:text="Add"
+        android:text="@string/prefAddButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/prefLocation" />
 
@@ -70,7 +70,7 @@
         android:layout_marginEnd="32dp"
         android:layout_marginRight="32dp"
         android:ems="10"
-        android:hint="Name of new preference"
+        android:hint="@string/newPref"
         android:inputType="textPersonName"
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -86,7 +86,7 @@
         android:layout_marginLeft="32dp"
         android:layout_marginTop="32dp"
         android:layout_marginBottom="32dp"
-        android:text="Temperature (°C)"
+        android:text="@string/temperature"
         app:layout_constraintBottom_toTopOf="@+id/prefLocation"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/weathertypesSpinner" />
@@ -98,7 +98,7 @@
         android:layout_marginEnd="32dp"
         android:layout_marginRight="32dp"
         android:ems="10"
-        android:hint="Min."
+        android:hint="@string/minTempHint"
         android:inputType="numberSigned"
         app:layout_constraintBaseline_toBaselineOf="@+id/temperature"
         app:layout_constraintEnd_toStartOf="@+id/maxTemp" />
@@ -110,7 +110,7 @@
         android:layout_marginEnd="32dp"
         android:layout_marginRight="32dp"
         android:ems="10"
-        android:hint="Max."
+        android:hint="@string/maxTempHint"
         android:inputType="numberSigned"
         app:layout_constraintBaseline_toBaselineOf="@+id/minTemp"
         app:layout_constraintEnd_toEndOf="parent" />
@@ -124,7 +124,7 @@
         android:layout_marginTop="32dp"
         android:layout_marginEnd="32dp"
         android:layout_marginRight="32dp"
-        android:text="Add a new preference"
+        android:text="@string/textViewPrefsActivity"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

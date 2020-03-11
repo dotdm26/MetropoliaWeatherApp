@@ -30,7 +30,7 @@
         android:layout_marginTop="32dp"
         android:layout_marginEnd="32dp"
         android:layout_marginRight="32dp"
-        android:text="Is it a nice day?"
+        android:text="@string/dayVerdict"
         android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -42,7 +42,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
         android:layout_marginLeft="32dp"
-        android:text="Settings"
+        android:text="@string/userButton"
         app:layout_constraintBaseline_toBaselineOf="@+id/listButton"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -53,7 +53,7 @@
         android:layout_marginEnd="32dp"
         android:layout_marginRight="32dp"
         android:layout_marginBottom="17dp"
-        android:text="Calendar"
+        android:text="@string/calendarButton"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
@@ -66,7 +66,7 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="32dp"
         android:layout_marginRight="32dp"
-        android:text="Weather data"
+        android:text="@string/weatherData"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -109,7 +109,7 @@
         android:layout_marginEnd="32dp"
         android:layout_marginRight="32dp"
         android:layout_marginBottom="16dp"
-        android:text="List"
+        android:text="@string/listMainActivityButton"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/calendarButton"
         app:layout_constraintStart_toEndOf="@+id/userButton" />

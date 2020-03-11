@@ -27,9 +27,7 @@ import java.util.ArrayList;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-import org.jsoup.select.Elements;
+
 
 import static com.example.metropoliaweatherapp.PreferencesActivity.LOCATION;
 import static com.example.metropoliaweatherapp.PreferencesActivity.SHARED_PREFS;

@@ -3,6 +3,31 @@
     <string name="title_activity_preferences">preferencesActivity</string>
     <string name="user_prefs_spinner">User Preferences Spinner</string>
     <string name="weather_types_spinner">Weather Types Spinner</string>
+    <string name="pastPrefsView">Past dates verdict</string>
+    <string name="listButton">Return</string>
+    <string name="dayVerdict">Is it a nice day?</string>
+    <string name="weatherData">Weather data</string>
+    <string name="userButton">Settings</string>
+    <string name="listMainActivityButton">List</string>
+    <string name="calendarButton">Calendar</string>
+    <string name="textViewPrefsActivity">Add a new preference</string>
+    <string name="temperature">Temperature (°C)</string>
+    <string name="minTempHint">Min.</string>
+    <string name="maxTempHint">Max.</string>
+    <string name="prefLocation">Location (City)</string>
+    <string name="newPref">Name of new preference</string>
+    <string name="prefAddButton">Add</string>
+    <string name="prefDisplayButton">List</string>
+    <string name="homeButton">Home</string>
+    <string name="noteSavedPRefs">Note: Hold your finger on an item to delete it.</string>
+    <string name="prefButton">Prefs</string>
+    <string name="homeButtonActivityPrefs">Home</string>
+    <string name="prefName">Preference</string>
+    <string name="minTempPrefInfo">Min. Temp</string>
+    <string name="maxTempPrefInfo">Max. Temp</string>
+    <string name="location">Location</string>
+    <string name="weather">Weather</string>
+    <string name="listButtonPrefInfo">List</string>
     <string-array name="saved_user_preferences">
         <item></item>
     </string-array>
