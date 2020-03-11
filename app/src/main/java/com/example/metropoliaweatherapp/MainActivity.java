@@ -5,7 +5,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.os.Bundle;
 
@@ -20,6 +23,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
+
 public class MainActivity extends AppCompatActivity {
     /**
      * Big message displaying "nice day" or "not a nice day".
@@ -29,11 +34,8 @@ public class MainActivity extends AppCompatActivity {
      * Calendar button to review past dates' information
      */
 
-    private Button calendarButton;
-    private Button userButton;
-    private Button listButton;
-    private TextView result;
-    private TextView temps;
+    private Button userButton, listButton, update;
+    private TextView result, temps;
     private RequestQueue mQueue;
 
 
@@ -45,16 +47,15 @@ public class MainActivity extends AppCompatActivity {
 
         temps = findViewById(R.id.temperature);
         result = findViewById(R.id.weatherRep);
-        Button update = findViewById(R.id.updateButton);
 
         mQueue = Volley.newRequestQueue(this);
 
+        update = findViewById(R.id.updateButton);
         update.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 jsonParse();
                 jsonParse2();
-                Log.d("whatever","whatever_i_want");
             }
         });
 
@@ -75,6 +76,22 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        Spinner prefSpinner = findViewById(R.id.savedprefsSpinner);
+        ArrayAdapter adapter = new ArrayAdapter<String>(
+                this,
+                android.R.layout.simple_spinner_item,
+                (ArrayList) GlobalModel.getInstance().getPreferences());
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        prefSpinner.setAdapter(adapter);
+        prefSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+            }
+        });
     }
 
     private void jsonParse() {
