@@ -31,9 +31,6 @@ public class MainActivity extends AppCompatActivity {
      * Calendar button to review past dates' information
      */
 
-    private Elements source;
-    private TextView parse;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,10 +59,6 @@ public class MainActivity extends AppCompatActivity {
                 calendar();
             }
         });
-
-        parse = findViewById(R.id.weatherData);
-        new doIt().execute();
-
 
         Spinner prefSpinner = findViewById(R.id.savedprefsSpinner);
         ArrayAdapter adapter = new ArrayAdapter<String>(
@@ -100,22 +93,4 @@ public class MainActivity extends AppCompatActivity {
         startActivity(list);
     }
 
-    public class doIt extends AsyncTask<Void, Void,Void> {
-        @Override
-        protected Void doInBackground(Void... voids) {
-            try {
-                Document doc = Jsoup.connect("https://www.bbc.com/weather/658225").get();
-                source = doc.getElementsByClass("wr-value--temperature--c");
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(Void aVoid) {
-            super.onPostExecute(aVoid);
-            parse.setText(source.get(0).text());
-        }
-    }
 }
