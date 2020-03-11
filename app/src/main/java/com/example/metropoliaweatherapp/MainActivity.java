@@ -3,11 +3,9 @@ package com.example.metropoliaweatherapp;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.util.Log;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.Spinner;
 import android.widget.TextView;
 import android.os.Bundle;
 
@@ -17,8 +15,6 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
-
-import java.util.ArrayList;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -33,9 +29,13 @@ public class MainActivity extends AppCompatActivity {
      * Calendar button to review past dates' information
      */
 
-    private Button userButton, listButton, parseButton;
-    private TextView mTextViewResult, temps;
+    private Button calendarButton;
+    private Button userButton;
+    private Button listButton;
+    private TextView result;
+    private TextView temps;
     private RequestQueue mQueue;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,20 +44,20 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         temps = findViewById(R.id.temperature);
-        mTextViewResult = findViewById(R.id.weatherRep);
+        result = findViewById(R.id.weatherRep);
+        Button update = findViewById(R.id.updateButton);
 
         mQueue = Volley.newRequestQueue(this);
 
-        parseButton = findViewById(R.id.updateButton);
-        parseButton.setOnClickListener(new View.OnClickListener() {
+        update.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 jsonParse();
                 jsonParse2();
+                Log.d("whatever","whatever_i_want");
             }
         });
 
-        setContentView(R.layout.activity_main);
 
         userButton = findViewById(R.id.userButton);
         userButton.setOnClickListener(new View.OnClickListener() {
@@ -75,47 +75,12 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        Spinner prefSpinner = findViewById(R.id.savedprefsSpinner);
-        ArrayAdapter adapter = new ArrayAdapter<String>(
-                this,
-                android.R.layout.simple_spinner_item,
-                (ArrayList) GlobalModel.getInstance().getPreferences());
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        prefSpinner.setAdapter(adapter);
-        prefSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-            }
-        });
-    }
-
-    public void clearWeather() {
-        mTextViewResult = findViewById(R.id.weatherRep);
-        temps = findViewById(R.id.temperature);
-
-        String clear = "";
-
-        mTextViewResult.setText(clear);
-        temps.setText(clear);
-    }
-
-    public void prefAdd() {
-        Intent pref = new Intent(this, PreferencesActivity.class);
-        startActivity(pref);
-    }
-
-    public void lvPrefs() {
-        Intent list = new Intent(this, listSavedPrefsActivity.class);
-        startActivity(list);
     }
 
     private void jsonParse() {
         clearWeather();
-        String location = GlobalModel.getInstance().getPreferences().get(1).getLocation();
+        int i = getIntent().getIntExtra("EXTRA", 0);
+        String location = GlobalModel.getInstance().getPreferences().get(i).getLocation();
         String cName = location;
         String url = "https://api.openweathermap.org/data/2.5/weather?q=" + cName + "&units=metric&appid=b9572d546f224251f9983505002bbe7c";
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null,
@@ -130,7 +95,7 @@ public class MainActivity extends AppCompatActivity {
                                 String main = weather.getString("main");
                                 String description = weather.getString("description");
 
-                                mTextViewResult.append(main + ", " + description);
+                                result.append(main + ", " + description);
                             }
 
                         } catch (JSONException e) {
@@ -148,7 +113,8 @@ public class MainActivity extends AppCompatActivity {
 
     private void jsonParse2() {
         clearWeather();
-        String location = GlobalModel.getInstance().getPreferences().get(1).getLocation();
+        int i = getIntent().getIntExtra("EXTRA", 0);
+        String location = GlobalModel.getInstance().getPreferences().get(i).getLocation();
         String cName = location;
         String url = "https://api.openweathermap.org/data/2.5/weather?q=" + cName + "&units=metric&appid=b9572d546f224251f9983505002bbe7c";
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null,
@@ -175,4 +141,27 @@ public class MainActivity extends AppCompatActivity {
         });
         mQueue.add(request);
     }
+
+    public void clearWeather() {
+        result = findViewById(R.id.weatherRep);
+        temps = findViewById(R.id.temperature);
+
+        String clear = "";
+
+        result.setText(clear);
+        temps.setText(clear);
+    }
+
+    public void prefAdd() {
+        Intent pref = new Intent(this, PreferencesActivity.class);
+        startActivity(pref);
+    }
+
+
+    public void lvPrefs() {
+        Intent list = new Intent(this, listSavedPrefsActivity.class);
+        startActivity(list);
+    }
+
+
 }
