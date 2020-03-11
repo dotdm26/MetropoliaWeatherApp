@@ -6,8 +6,11 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.os.Bundle;
 
@@ -19,6 +22,7 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -42,12 +46,9 @@ public class MainActivity extends AppCompatActivity {
     private Button calendarButton;
     private Button userButton;
     private Button listButton;
-    private Elements source;
-    private TextView parse;
     private TextView mTextViewResult;
     private TextView temps;
     private RequestQueue mQueue;
-    EditText cityName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -92,6 +93,23 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 calendar();
+            }
+        });
+
+        Spinner prefSpinner = findViewById(R.id.savedprefsSpinner);
+        ArrayAdapter adapter = new ArrayAdapter<String>(
+                this,
+                android.R.layout.simple_spinner_item,
+                (ArrayList) GlobalModel.getInstance().getPreferences());
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        prefSpinner.setAdapter(adapter);
+        prefSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
             }
         });
     }
