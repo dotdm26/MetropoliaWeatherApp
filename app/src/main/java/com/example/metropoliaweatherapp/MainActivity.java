@@ -3,17 +3,32 @@ package com.example.metropoliaweatherapp;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.os.Bundle;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
+
 import java.io.IOException;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
+
+import static com.example.metropoliaweatherapp.PreferencesActivity.LOCATION;
+import static com.example.metropoliaweatherapp.PreferencesActivity.SHARED_PREFS;
 
 public class MainActivity extends AppCompatActivity {
     /**
@@ -29,10 +44,31 @@ public class MainActivity extends AppCompatActivity {
     private Button listButton;
     private Elements source;
     private TextView parse;
+    private TextView mTextViewResult;
+    private TextView temps;
+    private RequestQueue mQueue;
+    EditText cityName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        setContentView(R.layout.activity_main);
+
+        temps = findViewById(R.id.temperature);
+        mTextViewResult = findViewById(R.id.text_view_result);
+        Button buttonParse = findViewById(R.id.button_parse);
+
+        mQueue = Volley.newRequestQueue(this);
+
+        buttonParse.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                jsonParse();
+                jsonParse2();
+            }
+        });
+
         setContentView(R.layout.activity_main);
 
         userButton = findViewById(R.id.userButton);
@@ -59,8 +95,18 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        parse = findViewById(R.id.weatherData);
+
         new doIt().execute();
+    }
+
+    public void clearWeather() {
+        mTextViewResult = findViewById(R.id.text_view_result);
+        temps = findViewById(R.id.temperature);
+
+        String clear = "";
+
+        mTextViewResult.setText(clear);
+        temps.setText(clear);
     }
 
     public void prefAdd() {
@@ -76,6 +122,71 @@ public class MainActivity extends AppCompatActivity {
     public void lvPrefs() {
         Intent list = new Intent(this, listSavedPrefsActivity.class);
         startActivity(list);
+    }
+
+    private void jsonParse() {
+        clearWeather();
+        SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
+        String location = sharedPreferences.getString(LOCATION, "");
+        String cName = location;
+        String url = "https://api.openweathermap.org/data/2.5/weather?q=" + cName + "&units=metric&appid=b9572d546f224251f9983505002bbe7c";
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try {
+                            JSONArray jsonArray = response.getJSONArray("weather");
+                            for (int i = 0; i < jsonArray.length(); i++) {
+                                JSONObject weather = jsonArray.getJSONObject(i);
+
+                                String main = weather.getString("main");
+                                String description = weather.getString("description");
+
+                                mTextViewResult.append(main + ", " + description);
+                            }
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                error.printStackTrace();
+            }
+        });
+        mQueue.add(request);
+    }
+
+    private void jsonParse2() {
+        clearWeather();
+        SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
+        String location = sharedPreferences.getString(LOCATION, "");
+        String cName = location;
+        String url = "https://api.openweathermap.org/data/2.5/weather?q=" + cName + "&units=metric&appid=b9572d546f224251f9983505002bbe7c";
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try {
+                            JSONObject jsonObject = response.getJSONObject("main");
+                            for (int i = 0; i < jsonObject.length(); i++) {
+
+                                double temp = jsonObject.getDouble("temp");
+
+                                temps.setText(String.valueOf(temp));
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                error.printStackTrace();
+            }
+        });
+        mQueue.add(request);
     }
 
     public class doIt extends AsyncTask<Void, Void,Void> {
