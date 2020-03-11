@@ -5,11 +5,8 @@ package com.example.metropoliaweatherapp;
  */
 
 public class Preference {
-    public String name;
-    public int minTemp;
-    public int maxTemp;
-    public String location;
-    public String weatherType;
+    public String name, location, weatherType;
+    public int minTemp, maxTemp;
 
     public Preference(String name, int minTemp, int maxTemp, String location, String weatherType) {
         this.name = name;

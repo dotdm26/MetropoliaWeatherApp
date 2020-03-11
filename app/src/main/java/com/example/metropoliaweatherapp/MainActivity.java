@@ -5,15 +5,22 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.os.Bundle;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
+
+import static com.example.metropoliaweatherapp.GlobalModel.preferences;
 
 public class MainActivity extends AppCompatActivity {
     /**
@@ -24,9 +31,6 @@ public class MainActivity extends AppCompatActivity {
      * Calendar button to review past dates' information
      */
 
-    private Button calendarButton;
-    private Button userButton;
-    private Button listButton;
     private Elements source;
     private TextView parse;
 
@@ -35,15 +39,15 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        userButton = findViewById(R.id.userButton);
+        Button userButton = findViewById(R.id.userButton);
         userButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                prefAdd();
+                prefNew();
             }
         });
 
-        listButton = findViewById(R.id.listButton);
+        Button listButton = findViewById(R.id.listButton);
         listButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -51,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        calendarButton = findViewById(R.id.calendarButton);
+        Button calendarButton = findViewById(R.id.calendarButton);
         calendarButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -61,9 +65,27 @@ public class MainActivity extends AppCompatActivity {
 
         parse = findViewById(R.id.weatherData);
         new doIt().execute();
+
+
+        Spinner prefSpinner = findViewById(R.id.savedprefsSpinner);
+        ArrayAdapter adapter = new ArrayAdapter<String>(
+                this,
+                android.R.layout.simple_spinner_item,
+                (ArrayList) GlobalModel.getInstance().getPreferences());
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        prefSpinner.setAdapter(adapter);
+        prefSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+            }
+        });
     }
 
-    public void prefAdd() {
+    public void prefNew() {
         Intent pref = new Intent(this, PreferencesActivity.class);
         startActivity(pref);
     }
