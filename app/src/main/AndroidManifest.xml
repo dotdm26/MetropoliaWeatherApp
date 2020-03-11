@@ -13,7 +13,6 @@
         android:theme="@style/AppTheme">
         <activity android:name=".QuestionnaireActivity"></activity>
         <activity android:name=".PreferencesActivity" />
-        <activity android:name=".calendarActivity" />
         <activity android:name=".listSavedPrefsActivity"></activity>
         <activity android:name=".PreferenceInfoActivity"></activity>
         <activity android:name=".MainActivity">

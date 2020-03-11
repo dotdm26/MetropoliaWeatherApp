@@ -41,11 +41,8 @@ public class MainActivity extends AppCompatActivity {
      * Calendar button to review past dates' information
      */
 
-    private Button calendarButton;
-    private Button userButton;
-    private Button listButton;
-    private TextView mTextViewResult;
-    private TextView temps;
+    private Button userButton, listButton;
+    private TextView mTextViewResult, temps;
     private RequestQueue mQueue;
 
     @Override
@@ -86,14 +83,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        calendarButton = findViewById(R.id.calendarButton);
-        calendarButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                calendar();
-            }
-        });
-
         Spinner prefSpinner = findViewById(R.id.savedprefsSpinner);
         ArrayAdapter adapter = new ArrayAdapter<String>(
                 this,
@@ -125,11 +114,6 @@ public class MainActivity extends AppCompatActivity {
     public void prefAdd() {
         Intent pref = new Intent(this, PreferencesActivity.class);
         startActivity(pref);
-    }
-
-    public void calendar() {
-        Intent cal = new Intent(this, calendarActivity.class);
-        startActivity(cal);
     }
 
     public void lvPrefs() {
