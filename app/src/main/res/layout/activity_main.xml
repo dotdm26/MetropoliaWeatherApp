@@ -7,6 +7,21 @@
     tools:context=".MainActivity">
 
     <TextView
+        android:id="@+id/temperature"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginLeft="32dp"
+        android:layout_marginTop="68dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginRight="32dp"
+        android:text="Weather data"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textClock" />
+
+    <TextView
         android:id="@+id/dayVerdict"
         android:layout_width="wrap_content"
         android:layout_height="61dp"
@@ -43,9 +58,9 @@
         app:layout_constraintEnd_toEndOf="parent" />
 
     <TextView
-        android:id="@+id/weatherData"
-        android:layout_width="0dp"
-        android:layout_height="226dp"
+        android:id="@+id/text_view_result"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
         android:layout_marginLeft="32dp"
         android:layout_marginTop="16dp"
@@ -76,18 +91,14 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/dayVerdict" />
 
-    <Spinner
-        android:id="@+id/savedprefsSpinner"
-        android:layout_width="0dp"
+    <Button
+        android:id="@+id/button_parse"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginLeft="32dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="32dp"
-        android:layout_marginRight="32dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/weatherData" />
+        android:layout_marginBottom="24dp"
+        android:text="Update"
+        app:layout_constraintBottom_toTopOf="@+id/listButton"
+        app:layout_constraintStart_toStartOf="@+id/listButton" />
 
     <Button
         android:id="@+id/listButton"
