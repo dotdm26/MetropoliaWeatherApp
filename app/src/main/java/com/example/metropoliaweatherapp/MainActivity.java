@@ -1,26 +1,13 @@
 package com.example.metropoliaweatherapp;
-
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.os.Bundle;
-
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
-
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-import org.jsoup.select.Elements;
-
-import static com.example.metropoliaweatherapp.GlobalModel.preferences;
 
 public class MainActivity extends AppCompatActivity {
     /**

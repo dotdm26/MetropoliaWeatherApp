@@ -6,10 +6,15 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import java.util.ArrayList;
 
 import static java.lang.Integer.parseInt;
 
@@ -27,22 +32,57 @@ public class PreferencesActivity extends AppCompatActivity {
      * Name, weather description, temperature, location and etc.
      */
 
-    TextView newPref, weatherType, prefLocation, minTemp, maxTemp;
+    TextView newPref, prefLocation, minTemp, maxTemp;
     Button homeButton, addPrefButton, prefDisplay;
+    Spinner weatherTypes;
+    String selectedWeather;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_preferences);
         newPref = (EditText) findViewById(R.id.newPref);
-        weatherType = (EditText) findViewById(R.id.weatherType);
         prefLocation = (EditText) findViewById(R.id.prefLocation);
         minTemp = (EditText) findViewById(R.id.minTemp);
         maxTemp = (EditText) findViewById(R.id.maxTemp);
 
+        //Spinner where the user selects their preferred weather type (All condition names are taken directly from https://openweathermap.org/weather-conditions
+        ArrayList weatherList = new ArrayList();
+        weatherList.add("Clear");
+        weatherList.add("Clouds");
+        weatherList.add("Drizzle");
+        weatherList.add("Rain");
+        weatherList.add("Thunderstorm");
+        weatherList.add("Snow");
+        weatherList.add("Tornado");
+        weatherList.add("Mist");
+        weatherList.add("Haze");
+        weatherList.add("Smoke");
+        weatherList.add("Dust");
+        weatherList.add("Fog");
+        weatherList.add("Sand");
+        weatherList.add("Ash");
+        weatherList.add("Squall");
+        weatherTypes = findViewById(R.id.weathertypesSpinner);
+        ArrayAdapter adapter = new ArrayAdapter<String>(
+                this,
+                android.R.layout.simple_spinner_item,
+                weatherList);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        weatherTypes.setAdapter(adapter);
+        weatherTypes.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                selectedWeather = adapterView.getItemAtPosition(i).toString();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+            }
+        });
 
         //Button to return to main activity
-        homeButton = findViewById(R.id.listButton);
+        homeButton = findViewById(R.id.homeButton);
         homeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -57,7 +97,7 @@ public class PreferencesActivity extends AppCompatActivity {
             public void onClick(View view) {
                 //Verifies whether all of the fields are filled or not
                 //Also whether the min and max temperature are coherent or not (min <= max)
-                if (newPref.getText().toString().isEmpty() || weatherType.getText().toString().isEmpty() || prefLocation.getText().toString().isEmpty() || minTemp.getText().toString().isEmpty() || maxTemp.getText().toString().isEmpty()) {
+                if (newPref.getText().toString().isEmpty() || selectedWeather.isEmpty() || prefLocation.getText().toString().isEmpty() || minTemp.getText().toString().isEmpty() || maxTemp.getText().toString().isEmpty()) {
                     toastNo();
                 } else if (Integer.parseInt(minTemp.getText().toString()) > Integer.parseInt(maxTemp.getText().toString())) {
                     toastTempDif();
@@ -95,7 +135,7 @@ public class PreferencesActivity extends AppCompatActivity {
         SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString(PREF_NAME, newPref.getText().toString());
-        editor.putString(WEATHER, weatherType.getText().toString());
+        editor.putString(WEATHER, selectedWeather);
         editor.putString(MIN_TEMP, String.valueOf(parseInt(minTemp.getText().toString())));
         editor.putString(MAX_TEMP, String.valueOf(parseInt(maxTemp.getText().toString())));
         editor.putString(LOCATION, prefLocation.getText().toString());

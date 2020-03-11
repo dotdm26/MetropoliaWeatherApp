@@ -66,7 +66,7 @@ public class listSavedPrefsActivity extends AppCompatActivity {
         });
 
         //Button to return to home screen (MainActivity)
-        homeButton = findViewById(R.id.listButton);
+        homeButton = findViewById(R.id.homeButton);
         homeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
