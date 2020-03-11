@@ -5,7 +5,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.os.Bundle;
 
@@ -20,6 +23,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
+
 public class MainActivity extends AppCompatActivity {
     /**
      * Big message displaying "nice day" or "not a nice day".
@@ -29,7 +34,6 @@ public class MainActivity extends AppCompatActivity {
      * Calendar button to review past dates' information
      */
 
-    private Button calendarButton;
     private Button userButton;
     private Button listButton;
     private TextView result;
@@ -75,21 +79,29 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        calendarButton = findViewById(R.id.calendarButton);
-        calendarButton.setOnClickListener(new View.OnClickListener() {
+        Spinner prefSpinner = findViewById(R.id.savedprefsSpinner);
+        ArrayAdapter adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item,(ArrayList) GlobalModel.getInstance().getPreferences());
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        prefSpinner.setAdapter(adapter);
+        prefSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
-            public void onClick(View view) {
-                calendar();
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
             }
         });
+
     }
 
     private void jsonParse() {
         clearWeather();
         int i = getIntent().getIntExtra("EXTRA", 0);
         String location = GlobalModel.getInstance().getPreferences().get(i).getLocation();
-        String cName = location;
-        String url = "https://api.openweathermap.org/data/2.5/weather?q=" + cName + "&units=metric&appid=b9572d546f224251f9983505002bbe7c";
+        String url = "https://api.openweathermap.org/data/2.5/weather?q=" + location + "&units=metric&appid=b9572d546f224251f9983505002bbe7c";
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null,
                 new Response.Listener<JSONObject>() {
                     @Override
@@ -122,8 +134,7 @@ public class MainActivity extends AppCompatActivity {
         clearWeather();
         int i = getIntent().getIntExtra("EXTRA", 0);
         String location = GlobalModel.getInstance().getPreferences().get(i).getLocation();
-        String cName = location;
-        String url = "https://api.openweathermap.org/data/2.5/weather?q=" + cName + "&units=metric&appid=b9572d546f224251f9983505002bbe7c";
+        String url = "https://api.openweathermap.org/data/2.5/weather?q=" + location + "&units=metric&appid=b9572d546f224251f9983505002bbe7c";
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null,
                 new Response.Listener<JSONObject>() {
                     @Override
@@ -164,10 +175,7 @@ public class MainActivity extends AppCompatActivity {
         startActivity(pref);
     }
 
-    public void calendar() {
-        Intent cal = new Intent(this, calendarActivity.class);
-        startActivity(cal);
-    }
+
 
     public void lvPrefs() {
         Intent list = new Intent(this, listSavedPrefsActivity.class);
