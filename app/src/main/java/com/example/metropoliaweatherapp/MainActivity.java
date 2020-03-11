@@ -35,8 +35,11 @@ public class MainActivity extends AppCompatActivity {
      */
 
     private Button userButton, listButton, update;
-    private TextView result, temps;
+    private TextView result, temps, dayVerdict;
     private RequestQueue mQueue;
+    private Spinner prefSpinner;
+    private String mainw, description;
+    private int temp;
 
 
     @Override
@@ -56,6 +59,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 jsonParse();
                 jsonParse2();
+                goodDay();
             }
         });
 
@@ -76,7 +80,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        Spinner prefSpinner = findViewById(R.id.savedprefsSpinner);
+        prefSpinner = findViewById(R.id.savedprefsSpinner);
         ArrayAdapter adapter = new ArrayAdapter<String>(
                 this,
                 android.R.layout.simple_spinner_item,
@@ -96,7 +100,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void jsonParse() {
         clearWeather();
-        int i = getIntent().getIntExtra("EXTRA", 0);
+        int i = prefSpinner.getSelectedItemPosition();
         String location = GlobalModel.getInstance().getPreferences().get(i).getLocation();
         String cName = location;
         String url = "https://api.openweathermap.org/data/2.5/weather?q=" + cName + "&units=metric&appid=b9572d546f224251f9983505002bbe7c";
@@ -109,10 +113,10 @@ public class MainActivity extends AppCompatActivity {
                             for (int i = 0; i < jsonArray.length(); i++) {
                                 JSONObject weather = jsonArray.getJSONObject(i);
 
-                                String main = weather.getString("main");
-                                String description = weather.getString("description");
+                                mainw = weather.getString("main");
+                                description = weather.getString("description");
 
-                                result.append(main + ", " + description);
+                                result.append(mainw + " \n" + description);
                             }
 
                         } catch (JSONException e) {
@@ -130,7 +134,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void jsonParse2() {
         clearWeather();
-        int i = getIntent().getIntExtra("EXTRA", 0);
+        int i = prefSpinner.getSelectedItemPosition();
         String location = GlobalModel.getInstance().getPreferences().get(i).getLocation();
         String cName = location;
         String url = "https://api.openweathermap.org/data/2.5/weather?q=" + cName + "&units=metric&appid=b9572d546f224251f9983505002bbe7c";
@@ -142,9 +146,9 @@ public class MainActivity extends AppCompatActivity {
                             JSONObject jsonObject = response.getJSONObject("main");
                             for (int i = 0; i < jsonObject.length(); i++) {
 
-                                int temp = jsonObject.getInt("temp");
+                                temp = jsonObject.getInt("temp");
 
-                                temps.setText(String.valueOf(temp));
+                                temps.setText(String.valueOf(temp) + "°C");
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -159,7 +163,21 @@ public class MainActivity extends AppCompatActivity {
         mQueue.add(request);
     }
 
-    public void clearWeather() {
+    private void goodDay() {
+        int num = prefSpinner.getSelectedItemPosition();
+        dayVerdict = findViewById(R.id.dayVerdict);
+        String weatherType = GlobalModel.getInstance().getPreferences().get(num).getWeatherType();
+        int minTemp = GlobalModel.getInstance().getPreferences().get(num).getMinTemp();
+        int maxTemp = GlobalModel.getInstance().getPreferences().get(num).getMaxTemp();
+        if (weatherType.equals(mainw) && temp >= minTemp && temp <= maxTemp){
+            dayVerdict.setText("It is a nice day!");
+        }
+        else {
+            dayVerdict.setText("It is a bad day :(");
+        }
+    }
+
+    private void clearWeather() {
         result = findViewById(R.id.weatherRep);
         temps = findViewById(R.id.temperature);
 
@@ -169,13 +187,13 @@ public class MainActivity extends AppCompatActivity {
         temps.setText(clear);
     }
 
-    public void prefAdd() {
+    private void prefAdd() {
         Intent pref = new Intent(this, PreferencesActivity.class);
         startActivity(pref);
     }
 
 
-    public void lvPrefs() {
+    private void lvPrefs() {
         Intent list = new Intent(this, listSavedPrefsActivity.class);
         startActivity(list);
     }
