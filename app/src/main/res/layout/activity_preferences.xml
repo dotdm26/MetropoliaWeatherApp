@@ -5,6 +5,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/settingsbackground1"
     android:orientation="vertical">
 
     <Button
@@ -13,7 +14,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
         android:layout_marginLeft="32dp"
-        android:layout_marginBottom="16dp"
+        android:layout_marginBottom="40dp"
         android:text="@string/prefDisplayButton"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -24,13 +25,13 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
         android:layout_marginLeft="32dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="12dp"
         android:layout_marginEnd="32dp"
         android:layout_marginRight="32dp"
         android:ems="10"
         android:hint="@string/prefLocation"
         android:inputType="textPersonName"
-        android:textSize="14sp"
+        android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -42,7 +43,7 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="32dp"
         android:layout_marginRight="32dp"
-        android:layout_marginBottom="16dp"
+        android:layout_marginBottom="40dp"
         android:text="@string/homeButton"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
@@ -64,13 +65,13 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
         android:layout_marginLeft="32dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="64dp"
         android:layout_marginEnd="32dp"
         android:layout_marginRight="32dp"
         android:ems="10"
         android:hint="@string/newPref"
         android:inputType="textPersonName"
-        android:textSize="14sp"
+        android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -85,31 +86,35 @@
         android:layout_marginTop="32dp"
         android:layout_marginBottom="32dp"
         android:text="@string/temperature"
+        android:textSize="20sp"
         app:layout_constraintBottom_toTopOf="@+id/prefLocation"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/weathertypesSpinner" />
+        app:layout_constraintTop_toBottomOf="@+id/weathertypesSpinner"
+        app:layout_constraintVertical_bias="0.275" />
 
     <EditText
         android:id="@+id/minTemp"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginEnd="32dp"
-        android:layout_marginRight="32dp"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginEnd="28dp"
+        android:layout_marginRight="28dp"
         android:ems="10"
         android:hint="@string/minTempHint"
         android:inputType="numberSigned"
+        android:textSize="25sp"
         app:layout_constraintBaseline_toBaselineOf="@+id/temperature"
         app:layout_constraintEnd_toStartOf="@+id/maxTemp" />
 
     <EditText
         android:id="@+id/maxTemp"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
         android:layout_marginEnd="32dp"
         android:layout_marginRight="32dp"
         android:ems="10"
         android:hint="@string/maxTempHint"
         android:inputType="numberSigned"
+        android:textSize="25sp"
         app:layout_constraintBaseline_toBaselineOf="@+id/minTemp"
         app:layout_constraintEnd_toEndOf="parent" />
 
@@ -119,11 +124,12 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
         android:layout_marginLeft="32dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="60dp"
         android:layout_marginEnd="32dp"
         android:layout_marginRight="32dp"
         android:text="@string/textViewPrefsActivity"
-        android:textSize="24sp"
+        android:textSize="30sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -138,6 +144,7 @@
         android:layout_marginEnd="32dp"
         android:layout_marginRight="32dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/newPref" />
 

@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/settingsbackground1"
     tools:context=".PreferenceInfoActivity">
 
     <TextView
@@ -12,12 +13,13 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
         android:layout_marginLeft="32dp"
-        android:layout_marginTop="64dp"
+        android:layout_marginTop="68dp"
         android:layout_marginEnd="32dp"
         android:layout_marginRight="32dp"
         android:text="@string/prefName"
-        android:textSize="36sp"
+        android:textSize="40sp"
         android:textStyle="bold"
+        app:fontFamily="monospace"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -26,10 +28,11 @@
         android:id="@+id/minTemp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginLeft="32dp"
+        android:layout_marginStart="68dp"
+        android:layout_marginLeft="68dp"
         android:text="@string/minTempPrefInfo"
-        android:textSize="24sp"
+        android:textSize="30sp"
+        app:fontFamily="monospace"
         app:layout_constraintBaseline_toBaselineOf="@+id/maxTemp"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -39,12 +42,14 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
         android:layout_marginLeft="32dp"
-        android:layout_marginTop="64dp"
+        android:layout_marginTop="132dp"
         android:layout_marginEnd="32dp"
         android:layout_marginRight="32dp"
         android:text="@string/location"
-        android:textSize="24sp"
+        android:textSize="35sp"
+        app:fontFamily="monospace"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/minTemp" />
 
@@ -52,11 +57,12 @@
         android:id="@+id/maxTemp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="32dp"
-        android:layout_marginRight="32dp"
+        android:layout_marginTop="64dp"
+        android:layout_marginEnd="68dp"
+        android:layout_marginRight="68dp"
         android:text="@string/maxTempPrefInfo"
-        android:textSize="24sp"
+        android:textSize="30sp"
+        app:fontFamily="monospace"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/prefName" />
 
@@ -64,9 +70,10 @@
         android:id="@+id/weather"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="16dp"
         android:text="@string/weather"
-        android:textSize="24sp"
+        android:textSize="30sp"
+        app:fontFamily="monospace"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/location" />
@@ -75,11 +82,22 @@
         android:id="@+id/listButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginLeft="32dp"
-        android:layout_marginBottom="16dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginLeft="28dp"
+        android:layout_marginBottom="32dp"
         android:text="@string/listButtonPrefInfo"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageView8"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="208dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/minmax" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

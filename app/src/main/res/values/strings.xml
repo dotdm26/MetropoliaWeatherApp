@@ -6,8 +6,10 @@
     <string name="pastPrefsView">Past dates verdict</string>
     <string name="listButton">Return</string>
     <string name="dayVerdict">Is it a nice day?</string>
-    <string name="weatherData">Weather data</string>
+    <string name="weatherRep">Settings</string>
+    <string name="weatherData">С°</string>
     <string name="userButton">Settings</string>
+    <string name="updateButton">Update</string>
     <string name="listMainActivityButton">List</string>
     <string name="calendarButton">Calendar</string>
     <string name="textViewPrefsActivity">Add a new preference</string>
@@ -23,8 +25,8 @@
     <string name="prefButton">Prefs</string>
     <string name="homeButtonActivityPrefs">Home</string>
     <string name="prefName">Preference</string>
-    <string name="minTempPrefInfo">Min. Temp</string>
-    <string name="maxTempPrefInfo">Max. Temp</string>
+    <string name="minTempPrefInfo">Min.</string>
+    <string name="maxTempPrefInfo">Max.</string>
     <string name="location">Location</string>
     <string name="weather">Weather</string>
     <string name="listButtonPrefInfo">List</string>
