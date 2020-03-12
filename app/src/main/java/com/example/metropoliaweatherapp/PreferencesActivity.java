@@ -136,7 +136,7 @@ public class PreferencesActivity extends AppCompatActivity {
         editor.putString(MIN_TEMP, String.valueOf(parseInt(minTemp.getText().toString())));
         editor.putString(MAX_TEMP, String.valueOf(parseInt(maxTemp.getText().toString())));
         editor.putString(LOCATION, prefLocation.getText().toString());
-        editor.commit();
+        editor.apply();
 
         super.onPause();
 

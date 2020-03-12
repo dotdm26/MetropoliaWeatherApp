@@ -3,6 +3,7 @@ package com.example.metropoliaweatherapp;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -10,6 +11,7 @@ import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.os.Bundle;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -28,8 +30,8 @@ public class MainActivity extends AppCompatActivity {
     /**
      * Big message displaying "nice day" or "not a nice day".
      * Followed by a few details about the weather.
-     * A spinner to select a specific activity (that comes with the preferred weather, ...)
-     * Location button to locate the user and get the weather data?
+     * A spinner that allows to choose from different user-made preference sets.
+     * Several buttons.
      */
 
     private Button userButton, listButton, update;
@@ -43,8 +45,8 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
 
+        setContentView(R.layout.activity_main);
 
         temps = findViewById(R.id.temperature);
         result = findViewById(R.id.weatherRep);
@@ -55,11 +57,17 @@ public class MainActivity extends AppCompatActivity {
         update.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                clearWeather();
+                jsonParse();
+                jsonParse2();
+                goodDay();
+                clearWeather();
                 jsonParse();
                 jsonParse2();
                 goodDay();
             }
         });
+
 
         userButton = findViewById(R.id.userButton);
         userButton.setOnClickListener(new View.OnClickListener() {
@@ -87,20 +95,22 @@ public class MainActivity extends AppCompatActivity {
         prefSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                jsonParse();
-                jsonParse2();
-                goodDay();
             }
+
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
             }
         });
     }
 
+    /**
+     * jsonParse parses the current weather conditions to the app.
+     */
+
     private void jsonParse() {
-        clearWeather();
         int i = prefSpinner.getSelectedItemPosition();
-        String cName = GlobalModel.getInstance().getPreferences().get(i).getLocation();
+        String location = GlobalModel.getInstance().getPreferences().get(i).getLocation();
+        String cName = location;
         String url = "https://api.openweathermap.org/data/2.5/weather?q=" + cName + "&units=metric&appid=b9572d546f224251f9983505002bbe7c";
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null,
                 new Response.Listener<JSONObject>() {
@@ -130,10 +140,14 @@ public class MainActivity extends AppCompatActivity {
         mQueue.add(request);
     }
 
+    /**
+     * jsonParse2 parses the current temperature to the app.
+     */
+
     private void jsonParse2() {
-        clearWeather();
         int i = prefSpinner.getSelectedItemPosition();
-        String cName = GlobalModel.getInstance().getPreferences().get(i).getLocation();
+        String location = GlobalModel.getInstance().getPreferences().get(i).getLocation();
+        String cName = location;
         String url = "https://api.openweathermap.org/data/2.5/weather?q=" + cName + "&units=metric&appid=b9572d546f224251f9983505002bbe7c";
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null,
                 new Response.Listener<JSONObject>() {
@@ -145,7 +159,7 @@ public class MainActivity extends AppCompatActivity {
 
                                 temp = jsonObject.getInt("temp");
 
-                                temps.setText(temp + "°C");
+                                temps.setText(String.valueOf(temp) + "°C");
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -160,14 +174,18 @@ public class MainActivity extends AppCompatActivity {
         mQueue.add(request);
     }
 
+    /**
+     * goodDay compares the parsed data to the user preferences and tells the user whether it is a
+     * nice day or a bad day depending on whether users' conditions are met or not.
+     */
+
     private void goodDay() {
         int num = prefSpinner.getSelectedItemPosition();
         dayVerdict = findViewById(R.id.dayVerdict);
         String weatherType = GlobalModel.getInstance().getPreferences().get(num).getWeatherType();
         int minTemp = GlobalModel.getInstance().getPreferences().get(num).getMinTemp();
         int maxTemp = GlobalModel.getInstance().getPreferences().get(num).getMaxTemp();
-
-        if (weatherType.equals(mainw) && minTemp <= temp && temp <= maxTemp) {
+        if (weatherType.equals(mainw) && temp >= minTemp && temp <= maxTemp) {
             dayVerdict.setText("It is a nice day!");
         }
         else {
@@ -175,23 +193,33 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * clearWeather empties the views that display the information.
+     */
+
     private void clearWeather() {
         result = findViewById(R.id.weatherRep);
         temps = findViewById(R.id.temperature);
+        dayVerdict = findViewById(R.id.dayVerdict);
 
         String clear = "";
 
         result.setText(clear);
         temps.setText(clear);
+        dayVerdict.setText(clear);
     }
+
 
     private void prefAdd() {
         Intent pref = new Intent(this, PreferencesActivity.class);
         startActivity(pref);
     }
 
+
     private void lvPrefs() {
         Intent list = new Intent(this, listSavedPrefsActivity.class);
         startActivity(list);
     }
+
+
 }
