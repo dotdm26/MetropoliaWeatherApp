@@ -94,27 +94,27 @@
 
     <EditText
         android:id="@+id/minTemp"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:layout_marginEnd="28dp"
         android:layout_marginRight="28dp"
         android:ems="10"
         android:hint="@string/minTempHint"
         android:inputType="numberSigned"
-        android:textSize="25sp"
+        android:textSize="20sp"
         app:layout_constraintBaseline_toBaselineOf="@+id/temperature"
         app:layout_constraintEnd_toStartOf="@+id/maxTemp" />
 
     <EditText
         android:id="@+id/maxTemp"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:layout_marginEnd="32dp"
         android:layout_marginRight="32dp"
         android:ems="10"
         android:hint="@string/maxTempHint"
         android:inputType="numberSigned"
-        android:textSize="25sp"
+        android:textSize="20sp"
         app:layout_constraintBaseline_toBaselineOf="@+id/minTemp"
         app:layout_constraintEnd_toEndOf="parent" />
 
