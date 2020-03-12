@@ -9,13 +9,15 @@
 
     <TextView
         android:id="@+id/prefName"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
         android:layout_marginLeft="32dp"
         android:layout_marginTop="64dp"
         android:layout_marginEnd="32dp"
         android:layout_marginRight="32dp"
+        android:foregroundGravity="center"
+        android:gravity="center_horizontal"
         android:text="@string/prefName"
         android:textSize="40sp"
         android:textStyle="bold"
