@@ -1,12 +1,20 @@
 package com.example.metropoliaweatherapp;
 
+import com.google.gson.annotations.SerializedName;
+
+import java.util.List;
+
 /**
  * For calling a preference's detailed information (name, weather type, ...)
  */
 
 public class Preference {
-    public String name, location, weatherType;
-    public int minTemp, maxTemp;
+    private String name;
+    private String location;
+    private String weatherType;
+    private int minTemp;
+    private int maxTemp;
+    private List<Preference> preferences;
 
     public Preference(String name, int minTemp, int maxTemp, String location, String weatherType) {
         this.name = name;

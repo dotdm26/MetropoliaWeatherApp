@@ -1,7 +1,6 @@
 package com.example.metropoliaweatherapp;
 
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -13,14 +12,12 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import java.util.ArrayList;
 
 import static java.lang.Integer.parseInt;
 
 public class PreferencesActivity extends AppCompatActivity {
 
-    public static final String SHARED_PREFS = "SHARED PREFERENCES";
     public static final String PREF_NAME = "PREFERENCE NAME";
     public static final String WEATHER = "WEATHER TYPE";
     public static final String MIN_TEMP = "MINIMUM TEMPERATURE";
@@ -47,7 +44,7 @@ public class PreferencesActivity extends AppCompatActivity {
         maxTemp = (EditText) findViewById(R.id.maxTemp);
 
         //Spinner where the user selects their preferred weather type (All condition names are taken directly from https://openweathermap.org/weather-conditions
-        ArrayList weatherList = new ArrayList();
+        ArrayList<String> weatherList = new ArrayList<>();
         weatherList.add("Clear");
         weatherList.add("Clouds");
         weatherList.add("Drizzle");
@@ -119,20 +116,20 @@ public class PreferencesActivity extends AppCompatActivity {
     }
 
     //Opens new activity (List of preferences)
-    public void lvPrefs() {
+    private void lvPrefs() {
         Intent list = new Intent(this, listSavedPrefsActivity.class);
         startActivity(list);
     }
 
     //Opens new activity (Main Activity)
-    public void returnHome() {
+    private void returnHome() {
         Intent home = new Intent(this, MainActivity.class);
         startActivity(home);
     }
 
     //Adds preference
-    public void prefAdd() {
-        SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
+    private void prefAdd() {
+        SharedPreferences sharedPreferences = getSharedPreferences(newPref.getText().toString(), MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString(PREF_NAME, newPref.getText().toString());
         editor.putString(WEATHER, selectedWeather);
@@ -140,6 +137,8 @@ public class PreferencesActivity extends AppCompatActivity {
         editor.putString(MAX_TEMP, String.valueOf(parseInt(maxTemp.getText().toString())));
         editor.putString(LOCATION, prefLocation.getText().toString());
         editor.commit();
+
+        super.onPause();
 
         String name = sharedPreferences.getString(PREF_NAME, "");
         String minTempStr = sharedPreferences.getString(MIN_TEMP, "");
@@ -153,16 +152,16 @@ public class PreferencesActivity extends AppCompatActivity {
     }
 
     //Toast confirming the addition of preference
-    public void toastYes() {
+    private void toastYes() {
         Toast.makeText(this, "User preferences have been saved", Toast.LENGTH_SHORT).show();
     }
 
     //Toast informing the user to fill out the preference's form if user clicks "Add" without filling them
-    public void toastNo() {
+    private void toastNo() {
         Toast.makeText(this, "Please fill out all required fields!", Toast.LENGTH_SHORT).show();
     }
 
-    public void toastTempDif() {
+    private void toastTempDif() {
         Toast.makeText(this, "Make sure the maximum temperature is not smaller than the minimum temperature!", Toast.LENGTH_SHORT).show();
     }
 }

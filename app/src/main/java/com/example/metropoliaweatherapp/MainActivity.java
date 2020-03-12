@@ -3,7 +3,6 @@ package com.example.metropoliaweatherapp;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -31,7 +30,6 @@ public class MainActivity extends AppCompatActivity {
      * Followed by a few details about the weather.
      * A spinner to select a specific activity (that comes with the preferred weather, ...)
      * Location button to locate the user and get the weather data?
-     * Calendar button to review past dates' information
      */
 
     private Button userButton, listButton, update;
@@ -45,8 +43,8 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_main);
+
 
         temps = findViewById(R.id.temperature);
         result = findViewById(R.id.weatherRep);
@@ -62,7 +60,6 @@ public class MainActivity extends AppCompatActivity {
                 goodDay();
             }
         });
-
 
         userButton = findViewById(R.id.userButton);
         userButton.setOnClickListener(new View.OnClickListener() {
@@ -90,8 +87,10 @@ public class MainActivity extends AppCompatActivity {
         prefSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                jsonParse();
+                jsonParse2();
+                goodDay();
             }
-
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
             }
@@ -101,8 +100,7 @@ public class MainActivity extends AppCompatActivity {
     private void jsonParse() {
         clearWeather();
         int i = prefSpinner.getSelectedItemPosition();
-        String location = GlobalModel.getInstance().getPreferences().get(i).getLocation();
-        String cName = location;
+        String cName = GlobalModel.getInstance().getPreferences().get(i).getLocation();
         String url = "https://api.openweathermap.org/data/2.5/weather?q=" + cName + "&units=metric&appid=b9572d546f224251f9983505002bbe7c";
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null,
                 new Response.Listener<JSONObject>() {
@@ -135,8 +133,7 @@ public class MainActivity extends AppCompatActivity {
     private void jsonParse2() {
         clearWeather();
         int i = prefSpinner.getSelectedItemPosition();
-        String location = GlobalModel.getInstance().getPreferences().get(i).getLocation();
-        String cName = location;
+        String cName = GlobalModel.getInstance().getPreferences().get(i).getLocation();
         String url = "https://api.openweathermap.org/data/2.5/weather?q=" + cName + "&units=metric&appid=b9572d546f224251f9983505002bbe7c";
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null,
                 new Response.Listener<JSONObject>() {
@@ -148,7 +145,7 @@ public class MainActivity extends AppCompatActivity {
 
                                 temp = jsonObject.getInt("temp");
 
-                                temps.setText(String.valueOf(temp) + "°C");
+                                temps.setText(temp + "°C");
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -169,7 +166,8 @@ public class MainActivity extends AppCompatActivity {
         String weatherType = GlobalModel.getInstance().getPreferences().get(num).getWeatherType();
         int minTemp = GlobalModel.getInstance().getPreferences().get(num).getMinTemp();
         int maxTemp = GlobalModel.getInstance().getPreferences().get(num).getMaxTemp();
-        if (weatherType.equals(mainw) && temp >= minTemp && temp <= maxTemp){
+
+        if (weatherType.equals(mainw) && minTemp <= temp && temp <= maxTemp) {
             dayVerdict.setText("It is a nice day!");
         }
         else {
@@ -192,11 +190,8 @@ public class MainActivity extends AppCompatActivity {
         startActivity(pref);
     }
 
-
     private void lvPrefs() {
         Intent list = new Intent(this, listSavedPrefsActivity.class);
         startActivity(list);
     }
-
-
 }

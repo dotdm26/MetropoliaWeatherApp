@@ -29,6 +29,7 @@ public class listSavedPrefsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.list_of_saved_prefs);
 
+
         //Displays ListView of saved preferences
         lv = findViewById(R.id.lvSavedPrefs);
         adapter = new ArrayAdapter<>(

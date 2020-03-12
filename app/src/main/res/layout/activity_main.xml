@@ -14,7 +14,7 @@
         android:layout_marginTop="156dp"
         android:text="@string/weatherData"
         android:textColor="@android:color/holo_orange_light"
-        android:textSize="130dp"
+        android:textSize="130sp"
         android:textStyle="bold|italic"
         app:fontFamily="sans-serif-medium"
         app:layout_constraintEnd_toEndOf="parent"
@@ -60,20 +60,16 @@
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:background="@drawable/listbutton2"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.305"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintBaseline_toBaselineOf="@+id/userButton"
+        app:layout_constraintStart_toEndOf="@+id/userButton" />
 
     <Button
         android:id="@+id/updateButton"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:layout_marginEnd="124dp"
-        android:layout_marginRight="124dp"
         android:background="@drawable/updatebutton2"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintBaseline_toBaselineOf="@+id/listButton"
+        app:layout_constraintStart_toEndOf="@+id/listButton" />
 
     <Button
         android:id="@+id/userButton"

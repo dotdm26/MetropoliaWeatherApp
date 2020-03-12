@@ -11,7 +11,6 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".QuestionnaireActivity"></activity>
         <activity android:name=".PreferencesActivity" />
         <activity android:name=".listSavedPrefsActivity"></activity>
         <activity android:name=".PreferenceInfoActivity"></activity>

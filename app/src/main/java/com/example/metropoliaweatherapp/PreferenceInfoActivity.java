@@ -38,9 +38,10 @@ public class PreferenceInfoActivity extends AppCompatActivity {
 
         //Displays detailed info of preference and puts them in the PlainText boxes
         int i = getIntent().getIntExtra("EXTRA", 0);
+        Log.d("Test", Integer.toString(i));
         name.setText(GlobalModel.getInstance().getPreferences().get(i).getName());
-        min.setText((GlobalModel.getInstance().getPreferences().get(i).getMinTemp()) + "°C");
-        max.setText((GlobalModel.getInstance().getPreferences().get(i).getMaxTemp()) + "°C");
+        min.setText(GlobalModel.getInstance().getPreferences().get(i).getMinTemp() + "°C");
+        max.setText(GlobalModel.getInstance().getPreferences().get(i).getMaxTemp() + "°C");
         location.setText(GlobalModel.getInstance().getPreferences().get(i).getLocation());
         weather.setText(GlobalModel.getInstance().getPreferences().get(i).getWeatherType());
     }
