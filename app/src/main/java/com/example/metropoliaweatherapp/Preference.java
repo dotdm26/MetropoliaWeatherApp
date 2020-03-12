@@ -11,7 +11,7 @@ public class Preference {
     private int minTemp;
     private int maxTemp;
 
-    public Preference(String name, int minTemp, int maxTemp, String location, String weatherType) {
+    private Preference(String name, int minTemp, int maxTemp, String location, String weatherType) {
         this.name = name;
         this.minTemp = minTemp;
         this.maxTemp = maxTemp;
