@@ -162,6 +162,6 @@ public class PreferencesActivity extends AppCompatActivity {
     }
 
     private void toastTempDif() {
-        Toast.makeText(this, "Make sure the maximum temperature is not smaller than the minimum temperature!", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "The max. temperature can't be smaller than the min. temperature!", Toast.LENGTH_SHORT).show();
     }
 }
